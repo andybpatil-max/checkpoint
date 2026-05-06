@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Deposits Inquiry</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Deposits Inquiry</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <form method="get" th:action="@{/Deposits.action}">
+    <input type="hidden" name="action" value="View"/>
+    From Date: <input type="text" name="fromDate" th:value="${sel.ch_from_date}"/>
+    To Date: <input type="text" name="toDate" th:value="${sel.ch_to_date}"/>
+    <button type="submit">View</button>
+  </form>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Account</th><th>Check#</th><th>Amount</th><th>Status</th><th>Date</th><th>Action</th></tr>
+    <tr th:each="row : ${sel.checkrows}">
+      <td th:text="${row.chex_account_num}"></td>
+      <td th:text="${row.chex_check_num}"></td>
+      <td th:text="${row.chex_check_amount_disp}"></td>
+      <td th:text="${row.chex_check_status}"></td>
+      <td th:text="${row.chex_proc_date_disp}"></td>
+      <td><a th:href="@{/Deposits.action(action='Modify', acctNum=${row.chex_account_num}, checkNum=${row.chex_check_num}, uniqueIsn=${row.chex_unique_isbn})}">Modify</a></td>
+    </tr>
+    <tr th:if="${sel.checkrows == null or sel.checkrows.length == 0}"><td colspan="6">No records found.</td></tr>
+  </table>
+</div></body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Users</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/User.action}">User Search</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>User List</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <table width="90%" border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Pass Changed</th>
+            <th>Pass Expires</th>
+            <th>Last Failure</th>
+            <th>Failed Attempts</th>
+            <th>Status</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="row : ${sel.userrows}">
+            <td th:text="${row.user_id}"></td>
+            <td th:text="${row.user_fname}"></td>
+            <td th:text="${row.user_lname}"></td>
+            <td th:text="${row.user_pass_lastmodified_f}"></td>
+            <td th:text="${row.user_pass_expiry_f}"></td>
+            <td th:text="${row.user_last_failed_login_f}"></td>
+            <td th:text="${row.user_failed_attempts}"></td>
+            <td th:text="${row.user_id_blocked}"></td>
+            <td>
+                <form method="post" th:action="@{/User.action(action='Delete')}" style="display:inline">
+                    <input type="hidden" name="userId" th:value="${row.user_id}"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/User.action(action='Modify', userId=${row.user_id})}">Modify</a>
+            </td>
+        </tr>
+        <tr th:if="${sel.userrows == null or sel.userrows.length == 0}">
+            <td colspan="10">No records found.</td>
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/User.action}">Back to Search</a>
+        &nbsp;
+        <a th:href="@{/User.action(action='New')}">
+            <button type="button">Add New User</button>
+        </a>
+    </p>
+</div>
+</body>
+</html>

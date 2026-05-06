@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Load Statistics</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Load Statistics</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <table border="1" cellpadding="4">
+    <tr th:each="row : ${stats}">
+      <td th:each="cell : ${row}" th:text="${cell}"></td>
+    </tr>
+    <tr th:if="${stats == null or stats.isEmpty()}"><td>No statistics available.</td></tr>
+  </table>
+  <p><a th:href="@{/Deposits.action}">Back to Deposits</a></p>
+</div></body></html>

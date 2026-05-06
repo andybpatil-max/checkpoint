@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Remote Host</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Rhosts.action}">Remote Hosts</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2 th:text="${actionMode == 'Add' ? 'Add Remote Host' : 'Update Remote Host'}">Remote Host</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <form th:action="@{/Rhosts.action}" method="post"
+          th:object="${rhostDetail}">
+        <input type="hidden" name="action" th:value="${actionMode}"/>
+
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th align="right">Node ID</th>
+                <td>
+                    <input type="text" th:field="*{rhosts_node_id}" size="30" maxlength="30"
+                           th:readonly="${actionMode != 'Add'}"/>
+                </td>
+            </tr>
+            <tr>
+                <th align="right">Remote Node</th>
+                <td><input type="text" th:field="*{rhosts_rem_node}" size="30" maxlength="15"/></td>
+            </tr>
+            <tr>
+                <th align="right">User</th>
+                <td><input type="text" th:field="*{rhosts_user_name}" size="15" maxlength="15"/></td>
+            </tr>
+            <tr>
+                <th align="right">Password</th>
+                <td><input type="password" th:field="*{rhosts_user_pass}" size="15" maxlength="15"/></td>
+            </tr>
+            <tr>
+                <th align="right">Verify Password</th>
+                <td><input type="password" th:field="*{rhosts_user_passv}" size="15" maxlength="15"/></td>
+            </tr>
+            <tr>
+                <th align="right">Transfer Mode</th>
+                <td>
+                    <select th:field="*{rhostsXferMode}">
+                        <option value="FTP">FTP</option>
+                        <option value="sFTP">Secure FTP</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <button type="submit"
+                    th:text="${actionMode == 'Add' ? 'Add Remote Host' : 'Update Remote Host'}">Submit</button>
+            &nbsp;
+            <a th:href="@{/Rhosts.action}">Cancel</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

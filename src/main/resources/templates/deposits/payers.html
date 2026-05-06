@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Payers</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Payer Accounts</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <form method="get" th:action="@{/DepositsPayer.action}">
+    <input type="hidden" name="action" value="View"/>
+    ABA From: <input type="text" name="payerAbaFrom" th:value="${sel.payerAbaFrom}"/>
+    ABA To: <input type="text" name="payerAbaTo" th:value="${sel.payerAbaTo}"/>
+    Acct From: <input type="text" name="payerAcctFrom" th:value="${sel.payerAcctFrom}"/>
+    Acct To: <input type="text" name="payerAcctTo" th:value="${sel.payerAcctTo}"/>
+    <button type="submit">View</button>
+  </form>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Source</th><th>ABA</th><th>Account</th><th>Name</th><th>Country</th><th>Bank</th><th colspan="2">Action</th></tr>
+    <tr th:each="row : ${sel.payerRows}">
+      <td th:text="${row.payersource}"></td>
+      <td th:text="${row.payeraba}"></td>
+      <td th:text="${row.payeracct}"></td>
+      <td th:text="${row.payername}"></td>
+      <td th:text="${row.payercountry}"></td>
+      <td th:text="${row.payerbank}"></td>
+      <td><form method="post" th:action="@{/DepositsPayer.action(action='Delete')}" style="display:inline">
+        <input type="hidden" name="payerAba" th:value="${row.payeraba}"/>
+        <input type="hidden" name="payerAcct" th:value="${row.payeracct}"/>
+        <button type="submit">Delete</button></form></td>
+      <td><a th:href="@{/DepositsPayer.action(action='Modify', payerAba=${row.payeraba}, payerAcct=${row.payeracct})}">Modify</a></td>
+    </tr>
+    <tr th:if="${sel.payerRows == null or sel.payerRows.length == 0}"><td colspan="8">No records found.</td></tr>
+  </table>
+  <p><a th:href="@{/DepositsPayer.action(action='New')}"><button type="button">New Payer</button></a></p>
+</div></body></html>

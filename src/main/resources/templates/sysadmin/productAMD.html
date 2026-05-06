@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Product</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Product.action}">Products</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2 th:text="${actionMode == 'Add' ? 'Add Product' : 'Update Product'}">Product</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <form th:action="@{/Product.action}" method="post" th:object="${prodDetail}">
+        <input type="hidden" name="action" th:value="${actionMode}"/>
+
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th align="right">Product ID</th>
+                <td>
+                    <input type="text" th:field="*{product_id}" size="3" maxlength="3"
+                           th:readonly="${actionMode != 'Add'}"/>
+                </td>
+            </tr>
+            <tr>
+                <th align="right">Menu ID</th>
+                <td><input type="text" th:field="*{product_menu_id}" size="10" maxlength="10"/></td>
+            </tr>
+            <tr>
+                <th align="right">Function ID</th>
+                <td><input type="text" th:field="*{product_menu_func_id}" size="10" maxlength="10"/></td>
+            </tr>
+            <tr>
+                <th align="right">Pnemonic</th>
+                <td><input type="text" th:field="*{product_pnemonic}" size="10" maxlength="10"/></td>
+            </tr>
+            <tr>
+                <th align="right">Description</th>
+                <td><input type="text" th:field="*{product_pmf_desc}" size="50" maxlength="100"/></td>
+            </tr>
+            <tr>
+                <th align="right">Link</th>
+                <td><input type="text" th:field="*{product_pmf_link}" size="50" maxlength="200"/></td>
+            </tr>
+            <tr>
+                <th align="right">Param</th>
+                <td><input type="text" th:field="*{product_pmf_param}" size="50" maxlength="200"/></td>
+            </tr>
+        </table>
+
+        <p>
+            <button type="submit"
+                    th:text="${actionMode == 'Add' ? 'Add Product' : 'Update Product'}">Submit</button>
+            &nbsp;
+            <a th:href="@{/Product.action}">Cancel</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

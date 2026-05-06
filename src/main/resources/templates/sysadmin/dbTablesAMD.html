@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - DB Table</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/DbTable.action}">DB Tables</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2 th:text="${actionMode == 'Add' ? 'Add DB Table' : 'Update DB Table'}">DB Table</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <form th:action="@{/DbTable.action}" method="post" th:object="${dbDetail}">
+        <input type="hidden" name="action" th:value="${actionMode}"/>
+
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th align="right">Application</th>
+                <td><input type="text" th:field="*{dbAppl}" size="30" maxlength="30"/></td>
+            </tr>
+            <tr>
+                <th align="right">Table</th>
+                <td>
+                    <input type="text" th:field="*{dbTable}" size="30" maxlength="30"
+                           th:readonly="${actionMode != 'Add'}"/>
+                </td>
+            </tr>
+            <tr>
+                <th align="right">SQL</th>
+                <td><textarea th:field="*{dbSql}" rows="4" cols="60"></textarea></td>
+            </tr>
+            <tr>
+                <th align="right">Init SQL</th>
+                <td><textarea th:field="*{dbInitSql}" rows="4" cols="60"></textarea></td>
+            </tr>
+        </table>
+
+        <p>
+            <button type="submit"
+                    th:text="${actionMode == 'Add' ? 'Add DB Table' : 'Update DB Table'}">Submit</button>
+            &nbsp;
+            <a th:href="@{/DbTable.action}">Cancel</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Group</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Group.action}">Groups</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2 th:text="${actionMode == 'Add' ? 'Add Group' : 'Manage Groups'}">Group</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <p>Product: <strong th:text="${prodId}"></strong></p>
+
+    <th:block th:if="${groupSel != null and groupSel.grouprows != null and groupSel.grouprows.length > 0}">
+    <h3>Existing Groups</h3>
+    <table border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>Product</th>
+            <th>Group ID</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="row : ${groupSel.grouprows}">
+            <td th:text="${row.gdProd}"></td>
+            <td th:text="${row.gdGroup_id}"></td>
+            <td>
+                <form method="post" th:action="@{/Group.action(action='Delete')}" style="display:inline">
+                    <input type="hidden" name="prodId" th:value="${row.gdProd}"/>
+                    <input type="hidden" name="groupId" th:value="${row.gdGroup_id}"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </th:block>
+
+    <h3 th:text="${actionMode == 'Add' ? 'Add New Group' : 'Update Group'}">Group Form</h3>
+    <form th:action="@{/Group.action}" method="post">
+        <input type="hidden" name="action" th:value="${actionMode}"/>
+        <input type="hidden" name="prodId" th:value="${prodId}"/>
+
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th align="right">Group ID</th>
+                <td><input type="text" name="groupId" size="10" maxlength="10"/></td>
+            </tr>
+            <tr>
+                <th align="right">Entitlements</th>
+                <td><input type="text" name="pmfList" size="50" maxlength="200"/></td>
+            </tr>
+        </table>
+
+        <p>
+            <button type="submit"
+                    th:text="${actionMode == 'Add' ? 'Add Group' : 'Update Group'}">Submit</button>
+            &nbsp;
+            <a th:href="@{/Group.action}">Cancel</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

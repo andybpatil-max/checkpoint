@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Menu</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}" href="/css/global-1.css"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td>
+                <strong>Checkpoint</strong>
+                &nbsp;&nbsp;
+                Node: <span th:text="${nodeName}">-</span>
+                &nbsp;&nbsp;
+                Date: <span th:text="${applDate}">-</span>
+            </td>
+            <td align="right">
+                Welcome,
+                <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp;&nbsp;
+                <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="menu-body">
+    <table width="100%" cellpadding="4" cellspacing="1" border="0" class="tbl">
+        <tr class="tblh">
+            <th>Module</th>
+            <th>Function</th>
+        </tr>
+        <th:block th:if="${productRows != null}">
+            <tr th:each="row : ${productRows}"
+                th:if="${row.product_menu_func_id == null || row.product_menu_func_id.trim().isEmpty() || row.product_menu_func_id.trim().equals(' ')}">
+                <td th:text="${row.product_id}">-</td>
+                <td>
+                    <a th:href="@{${row.product_pmf_link}}"
+                       th:text="${row.product_pmf_desc}">-</a>
+                </td>
+            </tr>
+        </th:block>
+        <tr th:if="${productRows == null or productRows.length == 0}">
+            <td colspan="2">No authorized modules. Contact system administrator.</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

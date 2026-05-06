@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - DDA Postings</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>DDA Postings</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <form method="get" th:action="@{/DepositsPost.action}">
+    <input type="hidden" name="action" value="View"/>
+    Source: <input type="text" name="chexSource" th:value="${acctSel.chexSource}"/>
+    <button type="submit">View</button>
+  </form>
+  <p>Total Amount: <span th:text="${acctSel.summ_total_amount}"></span>
+     &nbsp; Total Checks: <span th:text="${acctSel.summ_total_checks}"></span></p>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Seq#</th><th>Date</th><th>Amount</th><th>Debit Acct</th><th>Credit Acct</th><th>Tran Ref</th></tr>
+    <tr th:each="row : ${acctSel.postingRows}">
+      <td th:text="${row.postingSeqNum}"></td>
+      <td th:text="${row.postingBusinessdate}"></td>
+      <td th:text="${row.postingAmount}"></td>
+      <td th:text="${row.postingDebitAcct}"></td>
+      <td th:text="${row.postingCreditAcct}"></td>
+      <td th:text="${row.postingTranRefNum}"></td>
+    </tr>
+    <tr th:if="${acctSel.postingRows == null or acctSel.postingRows.length == 0}"><td colspan="6">No postings.</td></tr>
+  </table>
+</div></body></html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Deposits Summary</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Deposits Status Summary</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Status</th><th>Count</th><th>Amount</th></tr>
+    <tr th:each="row : ${sel.checkrows}">
+      <td th:text="${row.chex_check_status}"></td>
+      <td th:text="${row.chex_check_num}"></td>
+      <td th:text="${row.chex_check_amount_disp}"></td>
+    </tr>
+    <tr th:if="${sel.checkrows == null or sel.checkrows.length == 0}"><td colspan="3">No data.</td></tr>
+  </table>
+  <p><a th:href="@{/Deposits.action}">Back to Deposits</a></p>
+</div></body></html>

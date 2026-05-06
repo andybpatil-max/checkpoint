@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Fraud Checks</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Fraud / Genuine Checks</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Account</th><th>Check#</th><th>Amount</th><th>Status</th><th>Date</th><th>Fraud</th><th>Genuine</th></tr>
+    <tr th:each="row : ${sel.checkrows}">
+      <td th:text="${row.chex_account_num}"></td>
+      <td th:text="${row.chex_check_num}"></td>
+      <td th:text="${row.chex_check_amount_disp}"></td>
+      <td th:text="${row.chex_check_status}"></td>
+      <td th:text="${row.chex_proc_date_disp}"></td>
+      <td><form method="post" th:action="@{/Chex.action(action='FraudOne')}" style="display:inline">
+        <input type="hidden" name="chex_account_num" th:value="${row.chex_account_num}"/>
+        <input type="hidden" name="chex_check_num" th:value="${row.chex_check_num}"/>
+        <input type="hidden" name="chex_unique_isn" th:value="${row.chex_unique_isn}"/>
+        <button type="submit">Fraud</button></form></td>
+      <td><form method="post" th:action="@{/Chex.action(action='GenuineOne')}" style="display:inline">
+        <input type="hidden" name="chex_account_num" th:value="${row.chex_account_num}"/>
+        <input type="hidden" name="chex_check_num" th:value="${row.chex_check_num}"/>
+        <input type="hidden" name="chex_unique_isn" th:value="${row.chex_unique_isn}"/>
+        <button type="submit">Genuine</button></form></td>
+    </tr>
+    <tr th:if="${sel.checkrows == null or sel.checkrows.length == 0}"><td colspan="7">No records found.</td></tr>
+  </table>
+</div></body></html>

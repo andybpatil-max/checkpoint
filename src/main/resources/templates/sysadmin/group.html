@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Groups</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>Group Management</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+    <p>Select a product to manage its groups:</p>
+
+    <table width="60%" border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>Product ID</th>
+            <th>Description</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="row : ${prodSel.productrows}">
+            <td th:text="${row.product_id}"></td>
+            <td th:text="${row.product_pmf_desc}"></td>
+            <td>
+                <a th:href="@{/Group.action(action='New', prodId=${row.product_id})}">New Group</a>
+            </td>
+            <td>
+                <a th:href="@{/Group.action(action='Modify', prodId=${row.product_id})}">Manage Groups</a>
+            </td>
+        </tr>
+        <tr th:if="${prodSel.productrows == null or prodSel.productrows.length == 0}">
+            <td colspan="4">No products found.</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

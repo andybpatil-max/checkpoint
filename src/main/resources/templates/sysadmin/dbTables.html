@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - DB Tables</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>DB Table Management</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <table width="90%" border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>Application</th>
+            <th>Table</th>
+            <th>SQL</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="row : ${sel.dbRows}">
+            <td th:text="${row.dbAppl}"></td>
+            <td th:text="${row.dbTable}"></td>
+            <td th:text="${row.dbSql}"></td>
+            <td>
+                <form method="post" th:action="@{/DbTable.action(action='Delete')}" style="display:inline">
+                    <input type="hidden" name="tableId" th:value="${row.dbTable}"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/DbTable.action(action='Modify', tableId=${row.dbTable})}">Modify</a>
+            </td>
+        </tr>
+        <tr th:if="${sel.dbRows == null or #lists.isEmpty(sel.dbRows)}">
+            <td colspan="5">No records found.</td>
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/DbTable.action(action='New')}">
+            <button type="button">New DB Table</button>
+        </a>
+    </p>
+</div>
+</body>
+</html>

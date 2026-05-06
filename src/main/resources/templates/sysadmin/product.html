@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Products</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>Product Management</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <table width="90%" border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>Product ID</th>
+            <th>Menu ID</th>
+            <th>Func ID</th>
+            <th>Pnemonic</th>
+            <th>Description</th>
+            <th>Link</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="row : ${sel.productrows}">
+            <td th:text="${row.product_id}"></td>
+            <td th:text="${row.product_menu_id}"></td>
+            <td th:text="${row.product_menu_func_id}"></td>
+            <td th:text="${row.product_pnemonic}"></td>
+            <td th:text="${row.product_pmf_desc}"></td>
+            <td th:text="${row.product_pmf_link}"></td>
+            <td>
+                <form method="post" th:action="@{/Product.action(action='Delete')}" style="display:inline">
+                    <input type="hidden" name="prodId" th:value="${row.product_id}"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/Product.action(action='Modify',
+                    prodId=${row.product_id},
+                    menuId=${row.product_menu_id},
+                    funcId=${row.product_menu_func_id})}">Modify</a>
+            </td>
+        </tr>
+        <tr th:if="${sel.productrows == null or sel.productrows.length == 0}">
+            <td colspan="8">No records found.</td>
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/Product.action(action='New')}">
+            <button type="button">New Product</button>
+        </a>
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Stop Pay</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Stop Pay</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Account</th><th>Check#</th><th>Amount</th><th>Issue Date</th><th>Payee</th><th>Status</th><th colspan="2">Action</th></tr>
+    <tr th:each="row : ${sel.stoppayrows}">
+      <td th:text="${row.stopay_account_num}"></td>
+      <td th:text="${row.stopay_check_num}"></td>
+      <td th:text="${row.stopay_check_amount_disp}"></td>
+      <td th:text="${row.stopay_issue_date}"></td>
+      <td th:text="${row.stopay_payee}"></td>
+      <td th:text="${row.stopay_status}"></td>
+      <td><form method="post" th:action="@{/Stoppay.action(action='Delete')}" style="display:inline">
+        <input type="hidden" name="acctNum" th:value="${row.stopay_account_num}"/>
+        <input type="hidden" name="checkNum" th:value="${row.stopay_check_num}"/>
+        <button type="submit">Delete</button></form></td>
+      <td><a th:href="@{/Stoppay.action(action='Modify', acctNum=${row.stopay_account_num}, checkNum=${row.stopay_check_num})}">Modify</a></td>
+    </tr>
+    <tr th:if="${sel.stoppayrows == null or sel.stoppayrows.length == 0}"><td colspan="8">No records found.</td></tr>
+  </table>
+  <p><a th:href="@{/Stoppay.action(action='New')}"><button type="button">New Stop Pay</button></a></p>
+</div></body></html>

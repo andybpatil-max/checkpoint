@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: checkpoint
+  datasource:
+    url: jdbc:oracle:thin:@${DB_HOST:localhost}:${DB_PORT:1521}:${DB_SID:ORCL}
+    username: ${DB_USER:checkpoint}
+    password: ${DB_PASS:}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      initialization-fail-timeout: -1
+  security:
+    user:
+      name: ignored
+  threads:
+    virtual:
+      enabled: true
+
+app:
+  node-name: ${NODE_NAME:node1}
+  appl-date: ${APPL_DATE:}
+  smtp-host: ${SMTP_HOST:localhost}
+  smtp-port: ${SMTP_PORT:25}
+  smtp-from: ${SMTP_FROM:noreply@localhost}
+  min-size-pw: ${MIN_SIZE_PW:6}
+  max-past-pw: ${MAX_PAST_PW:6}
+  num-trys-pw: ${NUM_TRYS_PW:3}
+  bank-id: ${BANK_ID:}
+  our-aba: ${OUR_ABA:}
+  def-curr: ${DEF_CURR:USD}
+  app-schema: ${APP_SCHEMA:}
+  db-used: ${DB_USED:Oracle}
+  ftp-gateway: ${FTP_GATEWAY:}
+  images-per-pdf: ${IMAGES_PER_PDF:20}
+  checks-per-view: ${CHECKS_PER_VIEW:10}
+  image-url: ${IMAGE_URL:}
+  data-dir: ${DATA_DIR:/opt/checkpoint/data}
+  image-dir: ${IMAGE_DIR:/opt/checkpoint/images}
+  url-base: ${URL_BASE:http://localhost:8080/checkpoint}
+  rem-base-dir: ${REM_BASE_DIR:}
+  loc-input-dir: ${LOC_INPUT_DIR:}
+  loc-output-dir: ${LOC_OUTPUT_DIR:}
+  img-base-dir: ${IMG_BASE_DIR:}
+  from-email-address: ${FROM_EMAIL:noreply@localhost}
+  sys-alert-email: ${SYS_ALERT_EMAIL:}
+  debug-flag: ${DEBUG_FLAG:N}
+  release-version: ${RELEASE_VERSION:1.0}
+  eod-flag: N
+  bod-flag: N

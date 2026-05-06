@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - User</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/User.action}">Users</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2 th:text="${actionMode == 'Add' ? 'Add User' : 'Update User'}">User</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <form th:action="@{/User.action}" method="post" th:object="${userDetail}">
+        <input type="hidden" name="action" th:value="${actionMode}"/>
+
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th align="right">User ID</th>
+                <td>
+                    <input type="text" th:field="*{user_id}" size="15" maxlength="15"
+                           th:readonly="${actionMode != 'Add'}"/>
+                </td>
+                <th align="right">Status</th>
+                <td th:text="${userDetail.user_id_blocked}"></td>
+            </tr>
+            <tr>
+                <th align="right">Password</th>
+                <td><input type="password" th:field="*{user_pass_current}" size="32" maxlength="32"/></td>
+                <th align="right">Verify Password</th>
+                <td><input type="password" th:field="*{user_verify_pass}" size="32" maxlength="32"/></td>
+            </tr>
+            <tr>
+                <th align="right">First Name</th>
+                <td><input type="text" th:field="*{user_fname}" size="30" maxlength="50"/></td>
+                <th align="right">Last Name</th>
+                <td><input type="text" th:field="*{user_lname}" size="30" maxlength="50"/></td>
+            </tr>
+        </table>
+
+        <h3>Product Authorization</h3>
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr class="tblh">
+                <th>Product</th>
+                <th>Description</th>
+                <th>Group</th>
+            </tr>
+            <tr th:if="${prodSel != null and prodSel.prodNames != null}">
+                <td colspan="3">
+                    <table width="100%">
+                        <tr th:each="entry : ${prodSel.prodNames}">
+                            <td th:text="${entry.key}"></td>
+                            <td th:text="${entry.value}"></td>
+                            <td>
+                                <span th:switch="${entry.key}">
+                                    <input th:case="'A'" type="text" th:field="*{user_pa_auth}" size="10"/>
+                                    <input th:case="'B'" type="text" th:field="*{user_pb_auth}" size="10"/>
+                                    <input th:case="'C'" type="text" th:field="*{user_pc_auth}" size="10"/>
+                                    <input th:case="'D'" type="text" th:field="*{user_pd_auth}" size="10"/>
+                                    <input th:case="'E'" type="text" th:field="*{user_pe_auth}" size="10"/>
+                                    <input th:case="'F'" type="text" th:field="*{user_pf_auth}" size="10"/>
+                                    <input th:case="'G'" type="text" th:field="*{user_pg_auth}" size="10"/>
+                                    <input th:case="'H'" type="text" th:field="*{user_ph_auth}" size="10"/>
+                                    <input th:case="'I'" type="text" th:field="*{user_pi_auth}" size="10"/>
+                                    <input th:case="'J'" type="text" th:field="*{user_pj_auth}" size="10"/>
+                                    <input th:case="'K'" type="text" th:field="*{user_pk_auth}" size="10"/>
+                                    <input th:case="'L'" type="text" th:field="*{user_pl_auth}" size="10"/>
+                                    <input th:case="'M'" type="text" th:field="*{user_pm_auth}" size="10"/>
+                                    <span th:case="*" th:text="${entry.key}"></span>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <button type="submit"
+                    th:text="${actionMode == 'Add' ? 'Add User' : 'Update User'}">Submit</button>
+            &nbsp;
+            <a th:href="@{/User.action}">Cancel</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

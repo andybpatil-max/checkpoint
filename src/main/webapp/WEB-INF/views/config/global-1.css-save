@@ -1,0 +1,1165 @@
+/************
+ *   link   *
+ ***********/
+
+A          {color: blue; }
+A:Visited  {color: cc6600; font-weight:bold;}
+A:Active   {color: blue; font-weight:bold;}
+A:Hover    {color:darkgreen;
+	    background-color:ccff66;
+	    font-weight:bold;
+	    text-decoration:none; }
+
+/*********************/
+/* BASIC             */
+/*********************/
+
+html,
+body {
+    height: 100%;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+    /*padding-left:60px; */
+/*
+    background-color: #FFFFFF;
+    background-image: url(gifs/ectlProd1.png);
+    background-repeat: repeat;
+*/
+}
+
+p,h1,h2,h3,h4,h5,h5 {
+    margin: 0px;
+    padding: 0px;
+}
+
+br.clear {
+    height:1px;
+    clear:both;
+    line-height: 1px;
+    background-color: #00CC33;
+}
+
+table {
+    border-collapse: collapse;
+    width: 80%;
+/*    width: auto;	*/
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+    margin-top: -2px;
+    margin-bottom: 20px;
+ /*   padding-bottom: 20px; */
+}
+
+td {
+    background-color: #eef0f3; /* #98adc2; /*lightyellow;*/
+    font-size: 1.0em;	/* changed 3/6/2013 */
+    border: 1px solid black;
+/*    padding: 3px 5px 2px 5px; */
+    padding-top: 3px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    text-align: center;
+}
+
+th {background: url(gifs/th_bg2.png) repeat-y left top;
+    background-color: #d6e0eb; /* #98adc2; /*lightyellow;*/
+    background-size: cover;
+    color:black;
+/*    height: 100%; */
+    text-align: center;
+    font-size: 1.0em;	/* changed 3/6/2013 */
+    border: 1px solid black;
+    border-color: #14556b;
+/*    padding: 6px 10px 4px 10px; */
+    padding-top: 6px;
+    padding-right:10px;
+    padding-bottom:4px;;
+    padding-left:10px;
+}
+
+td,th {
+	border:1px solid #73afb7;
+/*	padding:3px 5px 2px 5px; */
+	padding-top:3px;
+	padding-right:5px;
+	padding-bottom:2px;
+	padding-left:5px;
+	font-size:1.0em;	/* changed 3/6/2013 */
+}
+
+th.header {
+    text-align: center;
+}
+th.headleft {
+    text-align: left;
+}
+th.headright {
+    text-align: right;
+}
+/*
+tbody { 
+    height:100px;
+    overflow:scroll;
+}
+*/
+/***********************************************
+ * color of the thin line surrounding the form *
+ **********************************************/
+TABLE.FORM {
+	width: auto;
+	text-align : center;
+	background-color : #000000;
+}
+/**************************************
+ * background color of the form title *
+ *************************************/
+TH.FORM {
+	text-align : center;
+	color      : black;
+	background-color : turquoise;
+	font-weight: bold;
+}
+/********************************
+ * background color of the form  #336699*
+ *******************************/
+TD.FORM {
+	text-align : center;
+	font-size : 2.0em;
+	background-color :   #eef0f3;
+}
+/*
+a:hover {
+    text-decoration: none;
+    background-color:lightgreen;
+}
+*/
+#help {
+    width: 1024;
+}
+
+#help td, ul, li {
+    text-align: left;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.1em
+}    
+
+h1.start {
+    text-align: center;
+    font-size: 1.1em;
+    margin-left: 200px;
+}
+
+h2 {
+    text-align: center;
+    font-size: .7em
+}    
+
+/*********************/
+/* LAYOUT */
+/*********************/
+
+#wrapper {
+/*    width: 1024px;	*/
+    width: 100%;
+    min-height: 100%;
+    position:relative;
+}
+
+#contentPanel {
+/*    width: 1024px;	*/
+    width: 100%;
+    min-height: 100%;
+    position:relative;
+/*
+    background-image: url(gifs/ectlDevelopment-v2.png);
+    background-image: url(gifs/ectlProduction-v2.png);
+    background-image: url(gifs/econtrolPreLive-v2.png);
+    background-image: url(gifs/ectlDevelopment.png);
+    background-image: url(gifs/econtrolDev.png);
+    background-image: url(gifs/econtrolProd.png);
+    background-image: url(gifs/econtrolPreLive.png);
+*/
+    background-image: url(gifs/ectlProduction-v2.png);
+    background-repeat: repeat;
+}
+
+#main {
+    padding-bottom: 250px;
+/*    width: 1024px;	*/
+    width: 100%;	/* Changed to 100% for wider screens	*/
+    margin-left: 0px;
+    margin-top: 0px;
+/*    padding-left:4%; */
+/*    padding-left:150px; /*changed to 150 for laptop on 10/9/2015 for commerz demo */
+}
+
+#main2 table { 
+    border-collapse: collapse;
+    width: 280px;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+    margin-bottom: 20px;
+}
+
+#main2 th {
+    width: 100px;
+    text-align:right;
+}
+
+#main2 td {
+    text-align:left;
+    width: auto;
+}
+
+/* Detail Table Entries */
+
+#detail table {
+    border-collapse: collapse;
+    width: 60%;
+/*    width: auto;	*/
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+}
+
+#detail th {
+    background: url(gifs/thbg-green1.png) repeat-x left top;
+    background-repeat: repeat-y;
+    width: 60%;
+/*    width: auto;	*/
+    height: auto;
+    text-align:right;
+}
+
+#detail th.header {
+    width: 60%;
+/*    width: auto;	*/
+    text-align:center;
+}
+
+#detail td {
+    text-align:left;
+    width: 60%;
+/*    width: auto;	*/
+    /*height: 24px;*/
+}
+
+/* Selection result rows ------------------------------------------------------------*/
+
+#selres table {
+    border-collapse: collapse;
+/*  width: auto	*/
+    width: 60% ;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+}
+#selres th {
+/*  width: auto	*/
+    width: 60% ;
+    text-align:left;
+}
+#selres th.header {
+/*  width: auto	*/
+    width: 60% ;
+    text-align:center;
+}
+#selres td {
+    text-align:left;
+/*  width: auto	*/
+    width: 60% ;
+    font-size: 1.0em;
+}
+
+/* Selection result rows ------------------------------------------------------------*/
+/*
+.selres table {
+    border-collapse: collapse;
+    width: auto;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+}
+
+.selres th {
+    width: auto;
+    text-align:left;
+}
+
+.selres th.header {
+    width: auto;
+    text-align:center;
+}
+
+.selres td {
+    text-align:left;
+    width: auto;
+    font-size: 1.0em;	
+}
+*/
+/* Reject Codes Explained */
+
+#rejcodes table {
+    border-collapse: collapse;
+    width: auto;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+}
+
+#rejcodes th {
+    width: auto;
+    text-align:left;
+}
+
+#rejcodes td {
+    text-align:left;
+    font-size: .9em;
+    font-weight: bold;
+    width: auto;
+}
+
+/* Totals */
+
+#totals table {
+    border-collapse: collapse;
+    width: auto;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+}
+
+#totals th {
+    width: auto;
+    text-align:left;
+}
+
+#totals td {
+    text-align:right;
+    font-size: 1.0em;
+    width: auto;
+}
+
+/* summary */
+
+#summary table {
+    border-collapse: collapse;
+    width: auto;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+}
+
+#summary th {
+    width: auto;
+    text-align:left;
+}
+
+#summary th.header {
+    width: auto;
+    text-align:center;
+}
+
+#summary td {
+    text-align:right;
+    font-size: .8em;
+    width: auto;
+}
+
+#summary td.red {
+    background-color: red;
+    text-align:right;
+    font-size: .8em;
+    font-color: white;
+    width: auto;
+}
+
+#summary td.orange {
+    background-color: orange;
+    text-align:right;
+    font-size: .8em;
+    font-color: white;
+    width: auto;
+}
+
+#summary td.lightgreen {
+    background-color: lightgreen;
+    text-align:right;
+    font-size: .8em;
+    font-color: black;
+    width: auto;
+}
+
+#summary td.yellow {
+    background-color: yellow;
+    text-align:right;
+    font-size: .8em;
+    font-color: black;
+    width: auto;
+}
+
+#summary td.skyblue {
+    background-color: skyblue;
+    text-align:right;
+    font-size: .8em;
+    font-color: black;
+    width: auto;
+}
+
+#errors li {
+    list-style: none;
+    font-size: .9em;
+    text-align: center;
+/*    padding-left: 10;
+    margin-left: -40; */
+}
+
+ul, li {
+    list-style: none;
+    font-size: 1.2em;
+    text-align: center;
+/*    padding-left: 10;
+    margin-left: -40; */
+}
+
+#footer ul, li {
+    list-style: none;
+    font-size: 1.0em;
+    text-align: left;
+/*    padding-left: 10;
+    margin-left: -40; */
+}
+
+#footer h1 {
+    text-align: center;
+    font-size: 1.5em
+    color: black;
+/*
+    color: #5F9794;
+*/
+}
+
+#footer li ul, li ol {
+	margin:0;
+}
+
+#footer ul, ol {
+	margin:0 1.5em 1.5em 0;
+	padding-left:1.5em;
+}
+
+#banner {
+    background-image: url(gifs/Banner-v1.png);
+    /*
+    background-image: url(gifs/banner-econtr.png);
+    background-image: url(gifs/pureDatawareBanner-ArialBlack32.png);
+    background-image: url(gifs/puredataware_banner-01.jpg);
+    background-image: url(gifs/puredataware_banner-04.png);
+    background-image: url(gifs/puredataware_banner_lightBlue_rpd.png);
+    background-image: url(gifs/pureDatawareBanner-ArialBlack46_rpd.png);
+    background-image: url(gifs/pureDatawareBanner-ArialBlack32_rpd.png);
+    background-image: url(gifs/puredataware_banner_lightBlue_rpd-v1.png);
+	*/
+    background-repeat: no-repeat;
+    background-position: center top;
+    width: 100%;
+/*    width: 1024px;	*/
+    margin-top:-10;
+}
+
+/*********************/
+/* BANNER STYLES     */
+/*********************/
+#background {
+    background-image: url(gifs/logo_image-5.jpg);
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+
+/* image superimposition/replacement technique */
+#banner .logo {
+    background: url(gifs/Commerz_35h.png) no-repeat left center;
+/*
+    background: url(gifs/logo-bnp.png) no-repeat left center;
+    background: url(gifs/CompanyLogo.png) no-repeat left center;
+    background: url(gifs/smbc_logo-v2.png) no-repeat left center;
+    background: url(gifs/CompanyLogo.png) no-repeat left center;
+    background: url(gifs/logo-fr-v2.png) no-repeat left center;
+    background: url(gifs/IntesaSanpaolo200.png) no-repeat left center;
+    background: url(gifs/wf_transparent_3.gif) no-repeat left top;
+    background: url(gifs/Nordea_Logo_1.gif) no-repeat left center;
+    background: url(gifs/FandGLogo1.png) no-repeat left top;
+*/
+    height:80px;
+    ext-indent: 10%;
+/*  ext-indent: -5000px;	*/
+}
+
+/* image superimposition/replacement technique */
+#banner .logo_1 {
+    background: url(gifs/wf_transparent_3.gif) no-repeat center top;
+/*
+    background: url(gifs/pureDataware-logo-02.png) no-repeat right center;
+    background: url(gifs/FandGLogo1.png) no-repeat left top;
+*/
+    height:80px;
+    text-indent: -5000px;
+}
+
+/**********************/
+/* MAIN SECTION STYLES*/
+/**********************/
+#main td {
+	width: auto;
+	font-size:1.0em;	/* changed 3/6/2013 */
+}
+
+#main h1 {
+    color: black;
+/*
+    color: #5F9794;
+*/
+    font: bold 22px "Century Gothic", "Gill Sans", Arial, sans-serif;
+    text-align: center;
+}
+
+#wrapper h1 {
+    color: #5F9794;
+    font: bold 22px "Century Gothic", "Gill Sans", Arial, sans-serif;
+    text-align: center;
+}
+
+div.sectionTitle {
+    font-size: larger;
+    color: #446644;
+    margin: 0px 0px 15px 0px;
+}
+
+textarea {
+    width: 200px;
+    height: 3em;
+}
+
+
+.growleft:hover (float:left;)
+a.growleft:hover img (height: 400px;)
+.grow:hover ()
+.grow:hover img (height: 120px;)
+
+/**/
+.my {
+    height: 250px;   	/* Height of the footer */
+    overflow:auto;	/*	scroll;*/
+    background: #eef0f3;
+}
+
+
+.container {
+	position:absolute;
+	width:100%;
+	bottom:0px;
+	margin:0px auto 0px 0px;
+}
+
+.span-1 {width:30px;}
+.span-2 {width:70px;}
+.span-3 {width:110px;}
+.span-4 {width:150px;}
+.span-41 {width:185px;}
+.span-5 {width:190px;}
+.span-51 {width:217px;}
+.span-6 {width:230px;}
+.span-61 {width:240px;}
+.span-7 {width:270px;}
+.span-8 {width:310px;}
+.span-9 {width:350px;}
+.span-10 {width:390px;}
+.span-101 {width:420px;}
+.span-11 {width:430px;}
+.span-12 {width:470px;}
+.span-13 {width:510px;}
+.span-131 {width:530px;}
+.span-14 {width:550px;}
+.span-15 {width:590px;}
+.span-16 {width:630px;}
+.span-161 {width:650px;}
+.span-17 {width:670px;}
+.span-18 {width:710px;}
+.span-19 {width:750px;}
+.span-20 {width:790px;}
+.span-21 {width:830px;}
+.span-22 {width:870px;}
+.span-23 {width:910px;}
+.span-24 {width:950px;margin-right:0;}
+.span-25 {width:975px;margin-right:0;}
+
+.column, .span-1, .span-2, .span-3, .span-4, .span-41, .span-5, .span-51, .span-6, .span-61, .span-7, .span-8, .span-9, .span-10, .span-101, .span-11, .span-12, .span-13, .span-131, .span-14, .span-15, .span-16, .span-161, .span-17, .span-18, .span-19, .span-20, .span-21, .span-22, .span-23, .span-24 {
+	float:left;
+	margin-right:1px;
+/*	margin-left:20px;*/
+}
+
+.px30-wide1 {width:30px;}
+.px70-wide2 {width:70px;}
+.px110-wide3 {width:110px;}
+.px150-wide4 {width:150px;}
+.px190-wide5 {width:190px;}
+.px230-wide6 {width:230px;}
+.px240-wide61 {width:240px;}
+.px270-wide7 {width:270px;}
+.px310-wide8 {width:310px;}
+.px350-wide9 {width:350px;}
+.px390-wide10 {width:390px;}
+.px430-wide11 {width:430px;}
+.px470-wide12 {width:470px;}
+.px510-wide13 {width:510px;}
+.px550-wide14 {width:550px;}
+.px590-wide15 {width:590px;}
+.px630-wide16 {width:630px;}
+.px670-wide17 {width:670px;}
+.px710-wide18 {width:710px;}
+.px750-wide19 {width:750px;}
+.px790-wide20 {width:790px;}
+.px830-wide21 {width:830px;}
+.px870-wide22 {width:870px;}
+.px910-wide23 {width:910px;}
+.px950-wide24 {width:950px;margin-right:0;}
+
+.wcolumn, .px-wide1, .px-wide2, .px-wide3, .px-wide4, .px-wide5, .px-wide6, .px-wide61, .px-wide7, .px-wide8, .px-wide9, .px-wide10, .px-wide11, .px-wide12, .px-wide13, .px-wide14, .px-wide15, .px-wide16, .px-wide17, .px-wide18, .px-wide19, .px-wide20, .px-wide21, .px-wide22, .px-wide23, .px-wide24 {
+	margin-right:10px;
+}
+
+
+/*
+#horlist ul li {
+    display: inline;
+    list-style-type: none;
+    list-style: none;
+    margin-left:200px;
+    float:left;
+  padding-right: 20px;
+  float:left;
+  margin-right:10px;
+*/
+}
+
+#horlist
+{
+    list-style-type: none;
+/*
+    margin: auto;
+    text-align: justify;
+    margin-left:300px;
+    background: #ccc
+    padding-left: 200px;
+    margin-right:10px;
+*/
+}
+
+#horlist li
+{
+    display: inline;
+/*    float: none; */
+    background: honeydew;
+    padding-left: 10px;
+}
+#horlist td
+{
+    background: white;
+}
+
+
+#horlist table {
+    border-collapse: collapse;
+    background-color: honeydew;
+/*
+    width: auto;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+*/
+    margin-top: 4px;
+    margin-bottom: 1px;
+}
+
+#horlist .stretch {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color:white;
+    /* if you need IE6/7 support */
+    *display: inline;
+    zoom: 1
+}
+#horlist .stretch1 {
+    display: inline-block;
+    width: 6%;
+    background-color:white;
+    /* if you need IE6/7 support */
+    *display: inline;
+    zoom: 1
+}
+
+.last {margin-right:0;}
+
+hr {
+	background:#ddd;
+	color:#ddd;
+	clear:both;
+	float:none;
+	width:100%;
+	height:1px;
+	margin:1em 0 1.45em;
+	border:none;
+}
+
+li ul, li ol {
+	margin:0;
+}
+/*
+#main1 {
+    padding: 1px 3px 0 6px;
+    width: auto;
+    margin-left: 320px;
+}
+*/
+#main1 a.rep {
+    text-decoration: none;
+/*    background-image: url(gifs/reportAccess.gif);	*/
+    background-image: url(gifs/reportAccess.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -9999;
+    display: block;
+    height: 40px;
+    width: 40px;
+}
+
+#main1 a.cal {
+    text-decoration: none;
+    background-image: url(gifs/calendarAccess.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -9999;
+    display: block;
+    height: 40px;
+    width: 40px;
+}
+
+#main1 a.rapid {
+    text-decoration: none;
+    background-image: url(gifs/expressAccess-v1.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -9999;
+    display: block;
+    height: 40px;
+    width: 40px;
+}
+
+#main1 a.prev {
+    text-decoration: none;
+    background-image: url(gifs/Actions-arrow-left-icon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -9999;
+    display: block;
+    height: 40px;
+    width: 40px;
+}
+#prev {
+    background-image:url(gifs/Actions-arrow-left-icon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -9999;
+    display:block;
+    height:24px;
+    width:24px;
+}
+#next {
+    background-image:url(gifs/Actions-arrow-right-icon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -9999;
+    display:block;
+    height:24px;
+    width:24px;
+}
+#nomore {
+    background-image:url(gifs/Record-Normal-Red-icon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -9999;
+    display:block;
+    height:24px;
+    width:24px;
+}
+#main1 a.next {
+    text-decoration: none;
+    background-image: url(gifs/Actions-arrow-right-icon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -9999;
+    display: block;
+    height: 40px;
+    width: 40px;
+}
+
+#main1 a.rep:hover {
+    text-decoration: none;
+/*    background-image: url(gifs/openReportAccess.gif); */
+    background-image: url(gifs/openReportAccess.png);
+    background-repeat: no-repeat;
+}
+#main1 a.cal:hover {
+    text-decoration: none;
+    background-image: url(gifs/openCalendarAccess.gif);
+    background-repeat: no-repeat;
+}
+#main1 a.rapid:hover {
+    text-decoration: none;
+    background-image: url(gifs/expressAccess-v1.png);
+    background-repeat: no-repeat;
+}
+
+
+#main1 table { 
+    border-collapse: collapse;
+    border: 1px solid #000000;
+    width: 790px;
+/*    width=100%; */
+    margin-bottom: 20px;
+}
+
+#main1 table.thin { 
+    border-collapse: collapse;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+#main1 tr {
+    border: 1px solid black;
+    border-collapse: collapse;	
+}
+
+#main1 th {
+    background-color: #99dddd;
+    border: 1px solid black;
+    border-collapse: collapse;	
+}
+
+#main1 td {
+    background-color: #ddeeee; /* #98adc2; /*lightyellow;*/
+    border: 1px solid black;
+    border-collapse: collapse;    	
+}
+/* report css */
+
+#caltab a.cal {
+    text-decoration: none;
+    background-color: lightblue;
+}
+
+#caltab table {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    border-collapse: collapse;
+    width: auto;
+    height: auto;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+    vertical-align: top;
+    margin-bottom: -0px;
+}
+
+#caltab th {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    width: auto;
+    text-align:left;
+    vertical-align: top;
+}
+
+#caltab tr {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    width: auto;
+    text-align:left;
+    vertical-align: top;
+    margin-bottom: 0px;
+}
+
+#caltab th.header {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    width: auto;
+    text-align:center;
+    vertical-align: top;
+}
+
+#caltab td.hdr {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    width: auto;
+    text-align:center;
+    vertical-align: top;
+}
+
+#caltab th.seldate {
+    width: auto;
+    text-align:center;
+    vertical-align: middle;
+}
+
+#caltab td {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    text-align:left;
+    width: auto;
+    font-size: 1.2em;	/* changed 3/6/2013 */
+    vertical-align: top;
+    margin-bottom: 0;
+}
+
+#caltab td.num {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    text-align:right;
+    font-weight:bold;
+    width: auto;
+    font-size: 1.0em;	/* changed 3/6/2013 */
+    vertical-align: top;
+}
+
+#caltab a.blue {
+    text-decoration: none;
+    background-color: lightblue;
+}
+#caltab a {
+    text-decoration: underline;
+    font-weight:bold;
+/*    background-color: lightblue; */
+}
+/*
+Calendar nacvigation
+*/
+#calnav table {
+    background-color: #151515;
+    border-collapse: collapse;
+    border: 0px hidden white;
+    width: auto;
+    height: auto;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+    vertical-align: top;
+    margin-bottom: -0px;
+}
+
+#calnav th {
+    background-color: white;
+    width: auto;
+    text-align:left;
+    vertical-align: top;
+}
+
+#calnav tr {
+    background-color: white;
+    width: auto;
+    text-align:left;
+    vertical-align: center;
+    margin-bottom: 0px;
+}
+
+#calnav td {
+    background-color: white;
+    border: 0px hidden white;
+    text-align:left;
+    width: auto;
+    font-size: 1.2em;	/* changed 3/6/2013 */
+    vertical-align: center;
+    margin-bottom: 0;
+}
+
+
+/* image superimposition/replacement technique */
+#repbanner {
+    background-image: url(gifs/Banner-v1.png);
+/*    background-image: url(gifs/banner-econtr.png);
+    background-image: url(gifs/puredataware_banner_lightBlue_rpd-v1.png); */
+    background-repeat: no-repeat;
+    background-position: right top;
+    width: 1024px;
+    margin-top:-10;
+    margin-left: 110px;
+}
+#repbanner .logo {
+    background: url(gifs/CompanyLogo.png) no-repeat left center;
+/*
+    background: url(gifs/smbc_logo-v2.png) no-repeat left center;
+    background: url(gifs/Commerz_35h.png) no-repeat left center;
+    background: url(gifs/logo-bnp.png) no-repeat left center;
+    background: url(gifs/logo-fr-v2.png) no-repeat left center;
+    background: url(gifs/IntesaSanpaolo200.png) no-repeat left center;
+ */
+    height:80px;
+    text-indent: -5000px;
+}
+
+#repmain {
+    padding-bottom: 250px;
+    width: auto;
+    height: auto;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding-left:0px;
+    padding-top: 0px;
+/*    overflow: auto; */
+}
+
+#repmain td.blue {
+    background-color: lightblue;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1em;
+    text-align: center
+    line-height: .2;
+}
+
+#repmain td.green {
+    background-color: lightgreen;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1em;
+}
+#repmain td.white {
+    background-color: white;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1em;
+}
+
+#repmain tr {
+    border: 1px solid black;
+    border-collapse: collapse;	
+}
+
+#repmain h1 {
+    color: black;
+    font: bold 22px "Century Gothic", "Gill Sans", Arial, sans-serif;
+    text-align: center;
+}
+/*
+pre {
+  width: 99%;
+  overflow: auto;
+  border: 1px solid #aaa;
+  padding: 0;
+  margin: 0;
+}
+*/
+/*
+#repmain pre {
+    display: inline;
+    margin: 0px;
+    padding: 0px;
+    line-height: .1;
+}
+*/
+#repmain div.blue {
+    background-color: lightblue;
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 100%;
+    width: 100%;
+    font-size: 1.4em;
+    text-align: center;
+    line-height: 1.2;
+}
+
+#repmain div.green {
+    background-color: lightgreen;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1em;
+    margin:0px;
+    text-align: left;
+    height: auto;
+}
+#repmain div.white {
+    background-color: white;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1em;
+    margin:0px;
+    text-align: left;
+    height: auto;
+}
+
+#repmain div.pre {
+    display: bolck;
+    width: 100%;
+    height: auto;
+    unicode-bidi: embed;
+    font-family: "Courier New", monospace;
+    line-height: .15;
+    border: 1px solid darkgrey;
+    white-space: pre;
+    word-wrap: break-word;
+    margin: 0px;
+    text-align: left;
+}
+
+.search {
+    margin-left: 0px;
+    margin-top: 0px;
+    width:auto;
+    border:1px solid #d3d3d3;
+}
+/*
+.search div {
+    width:100%;
+}
+*/
+.search .linker {
+    background-color:#d3d3d3;
+    padding: 2px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.search .linker> span:first-child + span {
+    float:right;
+    font-style: italic;
+}
+.search .stable {
+    display: none;
+    padding : 5px;
+}
+
+.search table {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    border-collapse: collapse;
+    width: auto;
+    height: auto;
+    font-family: "Century Gothic", "Gill Sans", Arial, sans-serif;
+    vertical-align: top;
+    margin-bottom: -0px;
+}
+
+.search th {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    width: auto;
+    text-align:left;
+    vertical-align: top;
+}
+
+.search tr {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    width: auto;
+    text-align:left;
+    vertical-align: top;
+    margin-bottom: 0px;
+}
+
+.search th.header {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    width: auto;
+    text-align:center;
+    vertical-align: top;
+}
+
+.search th.seldate {
+    width: auto;
+    text-align:center;
+    vertical-align: middle;
+}
+
+.search td {
+    background-color: lightyellow; /* #98adc2; /*lightyellow;*/
+    text-align:left;
+    width: auto;
+    font-size: 1.2em;	/* changed 3/6/2013 */
+    vertical-align: top;
+    margin-bottom: 0;
+}
+

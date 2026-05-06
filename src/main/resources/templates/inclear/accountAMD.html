@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Account Detail</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2 th:text="${actionMode == 'New' ? 'New Account' : 'Modify Account'}">Account</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <form method="post" th:action="${actionMode == 'New' ? '/Account.action?action=Add' : '/Account.action?action=Update'}" th:object="${acctDetail}">
+    <table cellpadding="4">
+      <tr><td>Account#:</td><td>
+        <th:block th:if="${actionMode == 'Modify'}"><input type="text" th:field="*{account_num}" readonly/></th:block>
+        <th:block th:if="${actionMode != 'Modify'}"><input type="text" th:field="*{account_num}"/></th:block>
+      </td></tr>
+      <tr><td>Currency:</td><td><input type="text" th:field="*{account_currency}"/></td></tr>
+      <tr><td>ACC Rep:</td><td><input type="text" th:field="*{account_acc_rep}"/></td></tr>
+      <tr><td>SW Address:</td><td><input type="text" th:field="*{account_sw_addr}"/></td></tr>
+      <tr><td>Client Name:</td><td><input type="text" th:field="*{account_client_name}" size="40"/></td></tr>
+      <tr><td>Address 1:</td><td><input type="text" th:field="*{account_client_addr1}" size="40"/></td></tr>
+      <tr><td>Address 2:</td><td><input type="text" th:field="*{account_client_addr2}" size="40"/></td></tr>
+      <tr><td>Address 3:</td><td><input type="text" th:field="*{account_client_addr3}" size="40"/></td></tr>
+      <tr><td>Effective Date:</td><td><input type="text" th:field="*{account_effective_date}"/></td></tr>
+      <tr><td>Closed Date:</td><td><input type="text" th:field="*{account_closed_date}"/></td></tr>
+      <tr><td>Max Check Amt:</td><td><input type="text" th:field="*{account_max_checkamt_disp}"/></td></tr>
+      <tr><td>Posi Pay Flag:</td><td><input type="text" th:field="*{account_posi_pay_flag}"/></td></tr>
+      <tr><td>Int/Ext:</td><td><input type="text" th:field="*{account_int_ext}"/></td></tr>
+    </table>
+    <button type="submit" th:text="${actionMode == 'New' ? 'Add' : 'Update'}">Submit</button>
+    <a th:href="@{/Account.action}"><button type="button">Cancel</button></a>
+  </form>
+</div></body></html>

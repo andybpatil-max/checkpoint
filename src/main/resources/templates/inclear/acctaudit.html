@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Account Audit</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Account Audit Log</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <form method="get" th:action="@{/AccountAudit.action}">
+    <input type="hidden" name="action" value="View"/>
+    Acct From: <input type="text" name="fromAccount" th:value="${sel.account_num_from}"/>
+    Acct To: <input type="text" name="toAccount" th:value="${sel.account_num_to}"/>
+    <button type="submit">View</button>
+  </form>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Account#</th><th>Currency</th><th>Client Name</th><th>Date</th><th>User</th><th>Action</th></tr>
+    <tr th:each="row : ${sel.accountrows}">
+      <td th:text="${row.account_num}"></td>
+      <td th:text="${row.account_currency}"></td>
+      <td th:text="${row.account_client_name}"></td>
+      <td th:text="${row.account_last_modified}"></td>
+      <td th:text="${row.account_mod_user}"></td>
+      <td th:text="${row.account_mod_func}"></td>
+    </tr>
+    <tr th:if="${sel.accountrows == null or sel.accountrows.length == 0}"><td colspan="6">No records found.</td></tr>
+  </table>
+</div></body></html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Accounts</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Accounts</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Account#</th><th>Currency</th><th>Client Name</th><th>Posi Pay</th><th>Int/Ext</th><th colspan="2">Action</th></tr>
+    <tr th:each="row : ${sel.accountrows}">
+      <td th:text="${row.account_num}"></td>
+      <td th:text="${row.account_currency}"></td>
+      <td th:text="${row.account_client_name}"></td>
+      <td th:text="${row.account_posi_pay_flag}"></td>
+      <td th:text="${row.account_int_ext}"></td>
+      <td><form method="post" th:action="@{/Account.action(action='Delete')}" style="display:inline">
+        <input type="hidden" name="acctNum" th:value="${row.account_num}"/>
+        <button type="submit">Delete</button></form></td>
+      <td><a th:href="@{/Account.action(action='Modify', acctNum=${row.account_num})}">Modify</a></td>
+    </tr>
+    <tr th:if="${sel.accountrows == null or sel.accountrows.length == 0}"><td colspan="7">No records found.</td></tr>
+  </table>
+  <p><a th:href="@{/Account.action(action='New')}"><button type="button">New Account</button></a></p>
+</div></body></html>

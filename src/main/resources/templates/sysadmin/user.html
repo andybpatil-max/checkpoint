@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Users</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>User Maintenance</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <form th:action="@{/User.action(action='View')}" method="get">
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr class="tblh">
+                <th>User ID From</th>
+                <th>User ID To</th>
+            </tr>
+            <tr>
+                <td>
+                    <select name="userFrom">
+                        <option value="">ALL</option>
+                        <option th:each="u : ${sel.userList}" th:value="${u}" th:text="${u}"></option>
+                    </select>
+                </td>
+                <td>
+                    <select name="userTo">
+                        <option value="">NONE</option>
+                        <option th:each="u : ${sel.userList}" th:value="${u}" th:text="${u}"></option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <button type="submit">View Users</button>
+            &nbsp;
+            <a th:href="@{/User.action(action='New')}">
+                <button type="button">Add New User</button>
+            </a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

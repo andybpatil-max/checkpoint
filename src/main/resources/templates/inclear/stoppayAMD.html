@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Stop Pay Detail</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2 th:text="${actionMode == 'New' ? 'New Stop Pay' : 'Modify Stop Pay'}">Stop Pay</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <form method="post" th:action="${actionMode == 'New' ? '/Stoppay.action?action=Add' : '/Stoppay.action?action=Update'}" th:object="${stopDetail}">
+    <table cellpadding="4">
+      <tr><td>Account #:</td><td>
+        <th:block th:if="${actionMode == 'Modify'}"><input type="text" th:field="*{stopay_account_num}" readonly/></th:block>
+        <th:block th:if="${actionMode != 'Modify'}"><input type="text" th:field="*{stopay_account_num}"/></th:block>
+      </td></tr>
+      <tr><td>Check #:</td><td>
+        <th:block th:if="${actionMode == 'Modify'}"><input type="text" th:field="*{stopay_check_num}" readonly/></th:block>
+        <th:block th:if="${actionMode != 'Modify'}"><input type="text" th:field="*{stopay_check_num}"/></th:block>
+      </td></tr>
+      <tr><td>Currency:</td><td><input type="text" th:field="*{stopay_currency}"/></td></tr>
+      <tr><td>Amount:</td><td><input type="text" th:field="*{stopay_check_amount_disp}"/></td></tr>
+      <tr><td>Issue Date:</td><td><input type="text" th:field="*{stopay_issue_date}"/></td></tr>
+      <tr><td>Expiry Date:</td><td><input type="text" th:field="*{stopay_expiry_date}"/></td></tr>
+      <tr><td>Payee:</td><td><input type="text" th:field="*{stopay_payee}" size="40"/></td></tr>
+      <tr><td>Swift Ref:</td><td><input type="text" th:field="*{stopay_swift_ref}"/></td></tr>
+      <tr><td>Status:</td><td><input type="text" th:field="*{stopay_status}"/></td></tr>
+    </table>
+    <button type="submit" th:text="${actionMode == 'New' ? 'Add' : 'Update'}">Submit</button>
+    <a th:href="@{/Stoppay.action}"><button type="button">Cancel</button></a>
+  </form>
+</div></body></html>

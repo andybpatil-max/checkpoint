@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Modify Check</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Modify Check</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <form method="post" th:action="@{/Chex.action(action='Update')}" th:object="${chexDetail}">
+    <table cellpadding="4">
+      <tr><td>Account #:</td><td><input type="text" th:field="*{chex_account_num}" readonly/></td></tr>
+      <tr><td>Check #:</td><td><input type="text" th:field="*{chex_check_num}" readonly/></td></tr>
+      <tr><td>Unique ISN:</td><td><input type="text" th:field="*{chex_unique_isn}" readonly/></td></tr>
+      <tr><td>Amount:</td><td><input type="text" th:field="*{chex_check_amount}"/></td></tr>
+      <tr><td>Status:</td><td><input type="text" th:field="*{chex_check_status}"/></td></tr>
+      <tr><td>Date:</td><td><input type="text" th:field="*{chex_proc_date}"/></td></tr>
+      <tr><td>Return Date:</td><td><input type="text" th:field="*{chex_return_date}"/></td></tr>
+      <tr><td>Return Reason:</td><td><input type="text" th:field="*{chex_return_reason}"/></td></tr>
+      <tr><td>Payee:</td><td><input type="text" th:field="*{chex_payee}" size="40"/></td></tr>
+      <tr><td>Comments:</td><td><input type="text" th:field="*{chex_comments}" size="40"/></td></tr>
+    </table>
+    <button type="submit">Update</button>
+    <a th:href="@{/Chex.action}"><button type="button">Cancel</button></a>
+  </form>
+</div></body></html>

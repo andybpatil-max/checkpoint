@@ -1,0 +1,2 @@
+drivername=org.gjt.mm.mysql.Driver
+url=jdbc:mysql//192.168.1.32/incl

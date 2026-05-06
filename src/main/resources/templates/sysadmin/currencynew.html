@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Currency</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Currency.action}">Currency</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2 th:text="${actionMode == 'Add' ? 'Add Currency' : 'Update Currency'}">Currency</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <form th:action="@{/Currency.action}" method="post" th:object="${currDetail}">
+        <input type="hidden" name="action" th:value="${actionMode}"/>
+
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th align="right">Code</th>
+                <td>
+                    <input type="text" th:field="*{currCode}" size="3" maxlength="3"
+                           th:readonly="${actionMode != 'Add'}"/>
+                </td>
+            </tr>
+            <tr>
+                <th align="right">Country</th>
+                <td><input type="text" th:field="*{currCountry}" size="30" maxlength="50"/></td>
+            </tr>
+            <tr>
+                <th align="right">Name</th>
+                <td><input type="text" th:field="*{currName}" size="30" maxlength="50"/></td>
+            </tr>
+            <tr>
+                <th align="right">Number</th>
+                <td><input type="text" th:field="*{currNumber}" size="5" maxlength="5"/></td>
+            </tr>
+            <tr>
+                <th align="right">Minor Unit</th>
+                <td><input type="text" th:field="*{currMinorUnit}" size="5" maxlength="5"/></td>
+            </tr>
+        </table>
+
+        <p>
+            <button type="submit"
+                    th:text="${actionMode == 'Add' ? 'Add Currency' : 'Update Currency'}">Submit</button>
+            &nbsp;
+            <a th:href="@{/Currency.action}">Cancel</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Load Checks</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Load Inclear Checks</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <table cellpadding="4">
+    <tr><td>Appl Date:</td><td th:text="${ctlDetail.appl_date}"></td></tr>
+    <tr><td>Bank ID:</td><td th:text="${ctlDetail.bankId}"></td></tr>
+    <tr><td>Our ABA:</td><td th:text="${ctlDetail.ourAba}"></td></tr>
+    <tr><td>File Loaded:</td><td th:text="${ctlDetail.file_loaded}"></td></tr>
+    <tr><td>Loaded Time:</td><td th:text="${ctlDetail.file_loaded_time}"></td></tr>
+  </table>
+  <form method="post" th:action="@{/LoadChex.action(action='LoadFile')}">
+    <table cellpadding="4">
+      <tr><td>File To Load:</td><td><input type="text" name="fileToLoad" size="60"/></td></tr>
+    </table>
+    <button type="submit">Load File</button>
+  </form>
+  <p><a th:href="@{/LoadChex.action(action='ViewStats')}">View Load Stats</a></p>
+</div></body></html>

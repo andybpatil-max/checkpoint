@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Remote Hosts</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>Remote Hosts Maintenance</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <table width="80%" border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>Node ID</th>
+            <th>Remote Node</th>
+            <th>User</th>
+            <th>Xfer Mode</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="row : ${sel.rhostrows}">
+            <td th:text="${row.rhosts_node_id}"></td>
+            <td th:text="${row.rhosts_rem_node}"></td>
+            <td th:text="${row.rhosts_user_name}"></td>
+            <td th:text="${row.rhostsXferMode}"></td>
+            <td>
+                <form method="post" th:action="@{/Rhosts.action(action='Delete')}" style="display:inline">
+                    <input type="hidden" name="hostId" th:value="${row.rhosts_node_id}"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/Rhosts.action(action='Modify', hostId=${row.rhosts_node_id})}">Modify</a>
+            </td>
+        </tr>
+        <tr th:if="${sel.rhostrows == null or #lists.isEmpty(sel.rhostrows)}">
+            <td colspan="6">No records found.</td>
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/Rhosts.action(action='New')}">
+            <button type="button">New Host</button>
+        </a>
+    </p>
+</div>
+</body>
+</html>

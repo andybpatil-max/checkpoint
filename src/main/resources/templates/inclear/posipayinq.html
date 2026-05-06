@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Positive Pay Inquiry</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Positive Pay Inquiry</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <form method="get" th:action="@{/Posipay.action}">
+    <input type="hidden" name="action" value="View"/>
+    Acct From: <input type="text" name="fromAccount" th:value="${sel.pp_from_acct}"/>
+    Acct To: <input type="text" name="toAccount" th:value="${sel.pp_to_acct}"/>
+    Check From: <input type="text" name="fromCheck" th:value="${sel.pp_from_check}"/>
+    Check To: <input type="text" name="toCheck" th:value="${sel.pp_to_check}"/>
+    <button type="submit">View</button>
+  </form>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>Account</th><th>Check#</th><th>Amount</th><th>Issue Date</th><th>Payee</th><th>Status</th></tr>
+    <tr th:each="row : ${sel.posipayrows}">
+      <td th:text="${row.pospay_account_num}"></td>
+      <td th:text="${row.pospay_check_num}"></td>
+      <td th:text="${row.pospay_check_amount_disp}"></td>
+      <td th:text="${row.pospay_issue_date}"></td>
+      <td th:text="${row.pospay_payee}"></td>
+      <td th:text="${row.pospay_status}"></td>
+    </tr>
+    <tr th:if="${sel.posipayrows == null or sel.posipayrows.length == 0}"><td colspan="6">No records found.</td></tr>
+  </table>
+</div></body></html>

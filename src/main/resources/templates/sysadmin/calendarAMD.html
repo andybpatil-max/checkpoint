@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Calendar</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Calendar.action}">Calendar</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2 th:text="${actionMode == 'Add' ? 'Add Calendar Year' : 'Update Calendar Year'}">Calendar</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <form th:action="@{/Calendar.action}" method="post" th:object="${calDetail}">
+        <input type="hidden" name="action" th:value="${actionMode}"/>
+
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th align="right">Year</th>
+                <td>
+                    <input type="text" th:field="*{hdYear}" size="4" maxlength="4"
+                           th:readonly="${actionMode != 'Add'}"/>
+                </td>
+            </tr>
+            <tr>
+                <th align="right">Currency</th>
+                <td><input type="text" th:field="*{hdCurr}" size="3" maxlength="3"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 1</th>
+                <td><input type="text" th:field="*{holidate_00}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 2</th>
+                <td><input type="text" th:field="*{holidate_01}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 3</th>
+                <td><input type="text" th:field="*{holidate_02}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 4</th>
+                <td><input type="text" th:field="*{holidate_03}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 5</th>
+                <td><input type="text" th:field="*{holidate_04}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 6</th>
+                <td><input type="text" th:field="*{holidate_05}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 7</th>
+                <td><input type="text" th:field="*{holidate_06}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 8</th>
+                <td><input type="text" th:field="*{holidate_07}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 9</th>
+                <td><input type="text" th:field="*{holidate_08}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 10</th>
+                <td><input type="text" th:field="*{holidate_09}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 11</th>
+                <td><input type="text" th:field="*{holidate_10}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 12</th>
+                <td><input type="text" th:field="*{holidate_11}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 13</th>
+                <td><input type="text" th:field="*{holidate_12}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 14</th>
+                <td><input type="text" th:field="*{holidate_13}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 15</th>
+                <td><input type="text" th:field="*{holidate_14}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 16</th>
+                <td><input type="text" th:field="*{holidate_15}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 17</th>
+                <td><input type="text" th:field="*{holidate_16}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 18</th>
+                <td><input type="text" th:field="*{holidate_17}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 19</th>
+                <td><input type="text" th:field="*{holidate_18}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+            <tr>
+                <th align="right">Holiday 20</th>
+                <td><input type="text" th:field="*{holidate_19}" size="10" maxlength="10" placeholder="YYYY-MM-DD"/></td>
+            </tr>
+        </table>
+
+        <p>
+            <button type="submit"
+                    th:text="${actionMode == 'Add' ? 'Add Calendar Year' : 'Update Calendar Year'}">Submit</button>
+            &nbsp;
+            <a th:href="@{/Calendar.action}">Cancel</a>
+        </p>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,2 @@
+drivername=oracle.jdbc.driver.OracleDriver
+url=jdbc:oracle:thin:@esl:1521:INCL

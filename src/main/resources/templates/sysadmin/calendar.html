@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Calendar</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>Holiday Calendar</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <table width="50%" border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>Year</th>
+            <th>Currency</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="row : ${sel.calendarrows}">
+            <td th:text="${row.hdYear}"></td>
+            <td th:text="${row.hdCurr}"></td>
+            <td>
+                <a th:href="@{/Calendar.action(action='Modify', year=${row.hdYear})}">Modify</a>
+            </td>
+        </tr>
+        <tr th:if="${sel.calendarrows == null or #lists.isEmpty(sel.calendarrows)}">
+            <td colspan="3">No records found.</td>
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/Calendar.action(action='New')}">
+            <button type="button">New Calendar Year</button>
+        </a>
+    </p>
+</div>
+</body>
+</html>

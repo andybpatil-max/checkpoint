@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Currency</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>Currency Management</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <table width="80%" border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>#</th>
+            <th>Code</th>
+            <th>Country</th>
+            <th>Name</th>
+            <th>Number</th>
+            <th>Minor Unit</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="row, stat : ${sel.currRows}">
+            <td th:text="${stat.index + 1}"></td>
+            <td th:text="${row.currCode}"></td>
+            <td th:text="${row.currCountry}"></td>
+            <td th:text="${row.currName}"></td>
+            <td th:text="${row.currNumber}"></td>
+            <td th:text="${row.currMinorUnit}"></td>
+            <td>
+                <form method="post" th:action="@{/Currency.action(action='Delete')}" style="display:inline">
+                    <input type="hidden" name="currId" th:value="${row.currCode}"/>
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/Currency.action(action='Modify', currId=${row.currCode})}">Modify</a>
+            </td>
+        </tr>
+        <tr th:if="${sel.currRows == null or #lists.isEmpty(sel.currRows)}">
+            <td colspan="8">No records found.</td>
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/Currency.action(action='New')}">
+            <button type="button">New Currency</button>
+        </a>
+    </p>
+</div>
+</body>
+</html>

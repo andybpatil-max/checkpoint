@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Load Statistics</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<body>
+<div id="header"><table width="100%" cellpadding="2"><tr>
+  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
+</tr></table></div>
+<div id="content">
+  <h2>Load Statistics</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <p>Total Checks: <span th:text="${statSel.totalChecks}"></span></p>
+  <table border="1" cellpadding="4">
+    <tr class="tblh"><th>ID</th><th>Field 1</th><th>Field 2</th><th>Field 3</th><th>Field 4</th><th>Field 5</th></tr>
+    <tr th:each="row : ${statSel.statRows}">
+      <td th:text="${row.statId}"></td>
+      <td th:text="${row.statField1}"></td>
+      <td th:text="${row.statField2}"></td>
+      <td th:text="${row.statField3}"></td>
+      <td th:text="${row.statField4}"></td>
+      <td th:text="${row.statField5}"></td>
+    </tr>
+    <tr th:if="${statSel.statRows == null or statSel.statRows.length == 0}"><td colspan="6">No statistics available.</td></tr>
+  </table>
+  <p><a th:href="@{/LoadChex.action}">Back to Load</a></p>
+</div></body></html>

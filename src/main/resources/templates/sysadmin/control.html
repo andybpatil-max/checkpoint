@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Checkpoint - Control</title>
+    <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+</head>
+<body>
+<div id="header">
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+        <tr>
+            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
+            <td align="right">
+                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
+                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="content">
+    <h2>Control Table Management</h2>
+    <div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+    <table width="90%" border="1" cellpadding="4" cellspacing="0">
+        <tr class="tblh">
+            <th>Product</th>
+            <th>Bank ID</th>
+            <th>Our ABA</th>
+            <th>Def Currency</th>
+            <th>Prev Biz Date</th>
+            <th>Appl Date</th>
+            <th>Next Biz Date</th>
+            <th>EOD Flag</th>
+        </tr>
+        <tr th:each="row : ${sel.controlRows}">
+            <td th:text="${row.productId}"></td>
+            <td th:text="${row.bankId}"></td>
+            <td th:text="${row.ourAba}"></td>
+            <td th:text="${row.defCurr}"></td>
+            <td th:text="${row.prevBizDate}"></td>
+            <td th:text="${row.applDate}"></td>
+            <td th:text="${row.nextBizDate}"></td>
+            <td th:text="${row.eodFlag}"></td>
+        </tr>
+        <tr th:if="${sel.controlRows == null or #lists.isEmpty(sel.controlRows)}">
+            <td colspan="8">No records found.</td>
+        </tr>
+    </table>
+
+    <th:block th:if="${not #lists.isEmpty(sel.controlRows)}">
+    <h3>Update Control</h3>
+    <form th:action="@{/Control.action(action='Update')}" method="post"
+          th:object="${sel.controlRows[0]}">
+
+        <table border="1" cellpadding="4" cellspacing="0">
+            <tr>
+                <th align="right">Product</th>
+                <td><input type="text" th:field="*{productId}" size="10" readonly/></td>
+            </tr>
+            <tr>
+                <th align="right">Application Date</th>
+                <td><input type="text" th:field="*{applDate}" size="10" maxlength="10"/></td>
+            </tr>
+            <tr>
+                <th align="right">Prev Biz Date</th>
+                <td><input type="text" th:field="*{prevBizDate}" size="10" maxlength="10"/></td>
+            </tr>
+            <tr>
+                <th align="right">Next Biz Date</th>
+                <td><input type="text" th:field="*{nextBizDate}" size="10" maxlength="10"/></td>
+            </tr>
+            <tr>
+                <th align="right">EOD Flag</th>
+                <td><input type="text" th:field="*{eodFlag}" size="3" maxlength="3"/></td>
+            </tr>
+            <tr>
+                <th align="right">BOD Flag</th>
+                <td><input type="text" th:field="*{bodFlag}" size="3" maxlength="3"/></td>
+            </tr>
+            <tr>
+                <th align="right">Our ABA</th>
+                <td><input type="text" th:field="*{ourAba}" size="15" maxlength="15"/></td>
+            </tr>
+            <tr>
+                <th align="right">Default Currency</th>
+                <td><input type="text" th:field="*{defCurr}" size="3" maxlength="3"/></td>
+            </tr>
+        </table>
+
+        <p>
+            <button type="submit">Update Control</button>
+        </p>
+    </form>
+    </th:block>
+</div>
+</body>
+</html>
