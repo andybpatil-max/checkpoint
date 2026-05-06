@@ -30,18 +30,26 @@
 <div id="menu-body">
     <table width="100%" cellpadding="4" cellspacing="1" border="0" class="tbl">
         <tr class="tblh">
-            <th>Module</th>
+            <th>Sub-Menu</th>
             <th>Function</th>
         </tr>
         <th:block th:if="${productRows != null}">
-            <tr th:each="row : ${productRows}"
-                th:if="${row.product_menu_func_id == null || row.product_menu_func_id.trim().isEmpty() || row.product_menu_func_id.trim().equals(' ')}">
-                <td th:text="${row.product_id}">-</td>
-                <td>
-                    <a th:href="@{${row.product_pmf_link}}"
-                       th:text="${row.product_pmf_desc}">-</a>
-                </td>
-            </tr>
+            <th:block th:each="row : ${productRows}">
+                <!-- Sub-menu / module header: func_id is blank -->
+                <tr th:if="${#strings.trim(row.product_menu_func_id).isEmpty()}" class="tblh">
+                    <td colspan="2">
+                        <strong th:text="${row.product_pmf_desc}">-</strong>
+                    </td>
+                </tr>
+                <!-- Function link: func_id is populated -->
+                <tr th:unless="${#strings.trim(row.product_menu_func_id).isEmpty()}">
+                    <td></td>
+                    <td>
+                        <a th:href="@{/Menu.action(prod=${row.product_id},menu=${row.product_menu_id},func=${row.product_menu_func_id})}"
+                           th:text="${row.product_pmf_desc}">-</a>
+                    </td>
+                </tr>
+            </th:block>
         </th:block>
         <tr th:if="${productRows == null or productRows.length == 0}">
             <td colspan="2">No authorized modules. Contact system administrator.</td>

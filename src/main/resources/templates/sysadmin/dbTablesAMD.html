@@ -4,20 +4,10 @@
     <meta charset="UTF-8"/>
     <title>Checkpoint - DB Table</title>
     <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+    <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/>
 </head>
 <body>
-<div id="header">
-    <table width="100%" cellpadding="2" cellspacing="0" border="0">
-        <tr>
-            <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/DbTable.action}">DB Tables</a></td>
-            <td align="right">
-                Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
-                &nbsp; <a th:href="@{/Logoff.action}">Logoff</a>
-            </td>
-        </tr>
-    </table>
-</div>
-
+    <div th:replace="~{fragments/layout :: header}"></div>
 <div id="content">
     <h2 th:text="${actionMode == 'Add' ? 'Add DB Table' : 'Update DB Table'}">DB Table</h2>
     <div th:if="${error}" style="color:red" th:text="${error}"></div>
@@ -55,5 +45,6 @@
         </p>
     </form>
 </div>
+    <div th:replace="~{fragments/layout :: footer}"></div>
 </body>
 </html>

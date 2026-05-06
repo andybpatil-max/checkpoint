@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- ===== HEADER BANNER ===== -->
+<div th:fragment="header">
+    <table width="100%" cellpadding="4" cellspacing="0" border="0">
+        <tr>
+            <th class="headleft" width="20%">
+                User ID: <span th:text="${user?.userId}">-</span>
+            </th>
+            <th width="50%" align="center">
+                <strong th:text="${user?.currentVersion}">Checkpoint</strong>
+            </th>
+            <th class="headright" width="20%" align="right">
+                <span th:text="${#dates.format(#dates.createNow(), 'MM/dd/yyyy HH:mm')}">-</span>
+            </th>
+        </tr>
+        <tr>
+            <th class="headleft" width="20%">
+                <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">-</span>
+            </th>
+            <th width="50%" align="center">
+                <span th:text="${user?.currentAppl}">-</span>
+                &nbsp;&nbsp;
+                <a th:href="@{/Menu.action}">Menu</a>
+                &nbsp;&nbsp;
+                <a th:href="@{/Logoff.action}">Logoff</a>
+            </th>
+            <th class="headright" width="20%" align="right">
+                App Date: <span th:text="${user?.applDate}">-</span>
+            </th>
+        </tr>
+    </table>
+</div>
+
+<!-- ===== FOOTER NAVIGATION ===== -->
+<div th:fragment="footer">
+    <div th:if="${menuGroups != null and !menuGroups.isEmpty()}" class="container my">
+        <hr style="color:red;background-color:red;height:1px;margin:0;"/>
+        <table cellpadding="4" cellspacing="0" border="0">
+            <tr>
+                <td th:each="group : ${menuGroups}" style="vertical-align:top; padding:5px 10px;">
+                    <h1 class="footerH1" th:text="${group.desc}">-</h1>
+                    <ul>
+                        <li th:each="func : ${group.functions}">
+                            <a th:href="@{/Menu.action(prod=${func.productId},menu=${func.menuId},func=${func.funcId})}"
+                               th:text="${func.desc}">-</a>
+                        </li>
+                    </ul>
+                </td>
+                <td style="vertical-align:top; padding:5px 10px;">
+                    <h1 class="footerH1">Start Over</h1>
+                    <ul>
+                        <li><a th:href="@{/Menu.action}">Home</a></li>
+                        <li><a th:href="@{/Logoff.action}">Logout</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head><meta charset="UTF-8"/><title>Checkpoint - Inclear Checks</title>
-<link rel="stylesheet" th:href="@{/css/global-1.css}"/></head>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+    <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/></head>
 <body>
-<div id="header"><table width="100%" cellpadding="2"><tr>
-  <td><strong>Checkpoint</strong> &nbsp; <a th:href="@{/Menu.action}">Menu</a></td>
-  <td align="right">Welcome, <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
-    &nbsp; <a th:href="@{/Logoff.action}">Logoff</a></td>
-</tr></table></div>
+    <div th:replace="~{fragments/layout :: header}"></div>
 <div id="content">
   <h2>Inclear Checks</h2>
   <div th:if="${error}" style="color:red" th:text="${error}"></div>
@@ -27,4 +24,5 @@
     <a th:href="@{/Chex.action(action='Authorize')}">Authorize</a> &nbsp;
     <a th:href="@{/Chex.action(action='Fraud')}">Fraud</a>
   </p>
-</div></body></html>
+</div>    <div th:replace="~{fragments/layout :: footer}"></div>
+</body></html>
