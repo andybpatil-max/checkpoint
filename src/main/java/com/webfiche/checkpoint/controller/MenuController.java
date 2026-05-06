@@ -13,6 +13,11 @@ public class MenuController extends BaseController {
 
     @Autowired private AppStartupService appStartupService;
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/Menu.action";
+    }
+
     @GetMapping("/Menu.action")
     public String menu(Model model) {
         if (!userSession.isLoggedIn()) {
