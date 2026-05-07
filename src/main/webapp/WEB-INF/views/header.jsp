@@ -1,38 +1,17 @@
 <%@ include file="taglibs.jsp" %>
-    <div id="main">
-	<table align="center">
-	    <tr>
-		<div id="banner">
-		    <div class="logo"/>
-	        </div>
-	    </tr>
-	    <tr>
-		<th class="headleft" width=15%>
-		    <font size="4">User ID:
-		    <c:out value='${user.userId}'/></font>
-		</th>
-		<th width="25%"><font size="4">
-		    <c:out value='${user.currentVersion}'/>
-		</th>
-		<th class="headright" width="15%" colspan="1">
-		    <font size="3">
-			<%= java.util.Calendar.getInstance().getTime() %>
-		    </font>
-		</th>
-	    </tr>
-	    <tr>
-		<th class="headleft" width=15%>
-		    <font size="4">User Name:
-		    <c:out value='${user.userFName}'/> <c:out value='${user.userLName}'/></font>
-		</th>
-		<th width="25%"><font size="4">
-		    <c:out value='${user.currentAppl}'/>
-		</th>
-		<th class="headright" width="15%" colspan="1">
-		    <font size="3">Application Date:
-			<c:out value='${user.applDate}'/>
-		    </font>
-		</th>
-	    </tr>
-	</table>
-
+<%@ page contentType="text/html;charset=UTF-8" %>
+<div id="banner" style="height:80px;"><div class="logo" style="height:80px;"></div></div>
+<div style="max-width:1024px; margin:0 auto;">
+<table width="100%" cellpadding="4" cellspacing="0" border="0">
+  <tr>
+    <th class="headleft" width="20%">User ID: <c:out value="${user.userId}"/></th>
+    <th width="60%" align="center"><strong><c:out value="${user.currentAppl}"/></strong></th>
+    <th class="headright" width="20%" align="right"><%= new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm").format(new java.util.Date()) %></th>
+  </tr>
+  <tr>
+    <th class="headleft" width="20%"><c:out value="${user.userFName}"/> <c:out value="${user.userLName}"/></th>
+    <th width="60%" align="center">App Date: <c:out value="${user.applDate}"/></th>
+    <th class="headright" width="20%" align="right">Node: <c:out value="${user.nodeName}"/></th>
+  </tr>
+</table>
+</div>

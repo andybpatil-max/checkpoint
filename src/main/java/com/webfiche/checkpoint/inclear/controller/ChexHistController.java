@@ -49,7 +49,7 @@ public class ChexHistController extends InclearBaseController {
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
-        return "inclear/chexhist";
+        return "chexhist";
     }
 
     @GetMapping(value = "/ChexHist.action", params = "action=View")
@@ -61,6 +61,10 @@ public class ChexHistController extends InclearBaseController {
                        @RequestParam(defaultValue = "") String toAccount,
                        @RequestParam(defaultValue = "") String fromCheck,
                        @RequestParam(defaultValue = "") String toCheck,
+                       @RequestParam(defaultValue = "") String fromAmount,
+                       @RequestParam(defaultValue = "") String toAmount,
+                       @RequestParam(defaultValue = "") String currency,
+                       @RequestParam(defaultValue = "N") String retstat,
                        Model model) {
         if (isNotLoggedIn()) return "redirect:/login";
         try (Connection conn = openConnection()) {
@@ -73,14 +77,37 @@ public class ChexHistController extends InclearBaseController {
             sel.setCh_to_account(toAccount);
             sel.setCh_from_check(fromCheck);
             sel.setCh_to_check(toCheck);
-            ArrayList<String> histList = sel.getHistList();
-            chUtil.GetHistRows(conn, histList, sel);
+            sel.setCh_from_amount(fromAmount);
+            sel.setCh_to_amount(toAmount);
+            sel.setCh_currency(currency);
+            sel.setCh_retstat(retstat);
+            chUtil.GetHistRows(conn, sel.getHistList(), sel);
             model.addAttribute("sel", sel);
             model.addAttribute("user", userSession.getUser());
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
-        return "inclear/chexhist";
+        return "chexhist";
+    }
+
+    @GetMapping(value = "/ChexHist.action", params = "action=Details")
+    public String details(@RequestParam(defaultValue = "") String procDate,
+                          @RequestParam(defaultValue = "") String acctNum,
+                          @RequestParam(defaultValue = "") String checkNum,
+                          @RequestParam(defaultValue = "") String uniqueIsn,
+                          Model model) {
+        if (isNotLoggedIn()) return "redirect:/login";
+        try (Connection conn = openConnection()) {
+            ChexSelector sel = buildSelector(conn);
+            chUtil.GetHistRows(conn, procDate, acctNum, checkNum, uniqueIsn, sel);
+            ChexDetail cd = sel.getCheckrows().length > 0 ? sel.getArow() : new ChexDetail();
+            model.addAttribute("chexDetail", cd);
+            model.addAttribute("sel", sel);
+            model.addAttribute("user", userSession.getUser());
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        return "chexhistdetail";
     }
 
     @GetMapping(value = "/ChexHist.action", params = "action=ViewImages")
@@ -104,6 +131,6 @@ public class ChexHistController extends InclearBaseController {
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
-        return "inclear/chexhistimage";
+        return "chexhistimage";
     }
 }
