@@ -1,60 +1,77 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Checkpoint - Menu</title>
     <link rel="stylesheet" th:href="@{/css/global-1.css}" href="/css/global-1.css"/>
+    <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/>
 </head>
 <body>
-<div id="header">
-    <table width="100%" cellpadding="2" cellspacing="0" border="0">
-        <tr>
-            <td>
-                <strong>Checkpoint</strong>
-                &nbsp;&nbsp;
-                Node: <span th:text="${nodeName}">-</span>
-                &nbsp;&nbsp;
-                Date: <span th:text="${applDate}">-</span>
-            </td>
-            <td align="right">
-                Welcome,
-                <span th:text="${user != null ? user.userFName + ' ' + user.userLName : ''}">User</span>
-                &nbsp;&nbsp;
-                <a th:href="@{/Logoff.action}">Logoff</a>
-            </td>
-        </tr>
-    </table>
-</div>
+<div th:replace="~{fragments/layout :: header}"></div>
 
-<div id="menu-body">
-    <table width="100%" cellpadding="4" cellspacing="1" border="0" class="tbl">
-        <tr class="tblh">
-            <th>Sub-Menu</th>
-            <th>Function</th>
-        </tr>
-        <th:block th:if="${productRows != null}">
-            <th:block th:each="row : ${productRows}">
-                <!-- Sub-menu / module header: func_id is blank -->
-                <tr th:if="${#strings.trim(row.product_menu_func_id).isEmpty()}" class="tblh">
-                    <td colspan="2">
-                        <strong th:text="${row.product_pmf_desc}">-</strong>
-                    </td>
-                </tr>
-                <!-- Function link: func_id is populated -->
-                <tr th:unless="${#strings.trim(row.product_menu_func_id).isEmpty()}">
-                    <td></td>
+<div id="menu-body" style="text-align:center; padding:20px;">
+
+    <!-- Level 1: Product list (no product selected) -->
+    <th:block th:if="${user == null or #strings.isEmpty(#strings.trim(user.currentProd))}">
+        <table align="center" cellpadding="6" cellspacing="1" border="0" class="tbl">
+            <tr class="tblh">
+                <th>Description</th>
+            </tr>
+            <th:block th:if="${productRows != null}">
+                <tr th:each="row : ${productRows}"
+                    th:if="${#strings.trim(row.product_menu_id).isEmpty() and #strings.trim(row.product_menu_func_id).isEmpty() and !#strings.trim(row.product_pmf_link).equals('NA')}">
                     <td>
-                        <a th:href="@{/Menu.action(prod=${row.product_id},menu=${row.product_menu_id},func=${row.product_menu_func_id})}"
+                        <a th:href="@{/Menu.action(prod=${row.product_id})}"
                            th:text="${row.product_pmf_desc}">-</a>
                     </td>
                 </tr>
             </th:block>
-        </th:block>
-        <tr th:if="${productRows == null or productRows.length == 0}">
-            <td colspan="2">No authorized modules. Contact system administrator.</td>
-        </tr>
-    </table>
+            <tr th:if="${productRows == null or productRows.length == 0}">
+                <td>No authorized modules. Contact system administrator.</td>
+            </tr>
+        </table>
+    </th:block>
+
+    <!-- Level 2: Menu group list (product selected, no menu selected) -->
+    <th:block th:if="${user != null and !#strings.isEmpty(#strings.trim(user.currentProd)) and #strings.isEmpty(#strings.trim(user.userMenu))}">
+        <table align="center" cellpadding="6" cellspacing="1" border="0" class="tbl">
+            <tr class="tblh">
+                <th th:text="${user.currentAppl}">Menu</th>
+            </tr>
+            <th:block th:each="group : ${menuGroups}">
+                <tr>
+                    <td>
+                        <a th:href="@{/Menu.action(prod=${group.productId},menu=${group.menuId})}"
+                           th:text="${group.desc}">-</a>
+                    </td>
+                </tr>
+            </th:block>
+            <tr th:if="${menuGroups == null or menuGroups.isEmpty()}">
+                <td>No menus available. Contact system administrator.</td>
+            </tr>
+        </table>
+        <p style="margin-top:10px;"><a th:href="@{/Menu.action(home=true)}">&larr; Back to Products</a></p>
+    </th:block>
+
+    <!-- Level 3: Function list (product and menu selected) -->
+    <th:block th:if="${user != null and !#strings.isEmpty(#strings.trim(user.currentProd)) and !#strings.isEmpty(#strings.trim(user.userMenu))}">
+        <table align="center" cellpadding="6" cellspacing="1" border="0" class="tbl">
+            <th:block th:each="group : ${menuGroups}" th:if="${group.menuId == #strings.trim(user.userMenu)}">
+                <tr class="tblh">
+                    <th th:text="${group.desc}">Functions</th>
+                </tr>
+                <tr th:each="func : ${group.functions}">
+                    <td>
+                        <a th:href="@{/Menu.action(prod=${func.productId},menu=${func.menuId},func=${func.funcId})}"
+                           th:text="${func.desc}">-</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <p style="margin-top:10px;"><a th:href="@{/Menu.action(prod=${user.currentProd})}">&larr; Back to Menu</a></p>
+    </th:block>
+
 </div>
+
 </body>
 </html>

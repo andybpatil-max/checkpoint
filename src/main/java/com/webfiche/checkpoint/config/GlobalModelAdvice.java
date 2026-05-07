@@ -21,26 +21,30 @@ public class GlobalModelAdvice {
         ProductSelector myProds = userSession.getMyProds();
         if (myProds != null) {
             model.addAttribute("productRows", myProds.getProductrows());
-            model.addAttribute("menuGroups", buildMenuGroups(myProds.getProductrows()));
+            String currentProd = userSession.getUser() != null
+                ? userSession.getUser().getCurrentProd().trim() : "";
+            model.addAttribute("menuGroups", buildMenuGroups(myProds.getProductrows(), currentProd));
         }
     }
 
-    private List<MenuGroup> buildMenuGroups(ProductDetail[] rows) {
+    private List<MenuGroup> buildMenuGroups(ProductDetail[] rows, String currentProd) {
         List<MenuGroup> groups = new ArrayList<>();
         MenuGroup current = null;
         for (ProductDetail row : rows) {
+            String prodId = row.getProduct_id().trim();
             String menuId = row.getProduct_menu_id().trim();
             String funcId = row.getProduct_menu_func_id().trim();
             String link   = row.getProduct_pmf_link().trim();
             if (menuId.isEmpty()) continue;
+            if (!currentProd.isEmpty() && !prodId.equals(currentProd)) continue;
             if (funcId.isEmpty()) {
                 if (!link.equals("NA") && !link.isEmpty()) {
-                    current = new MenuGroup(row.getProduct_pmf_desc(), row.getProduct_id(), menuId);
+                    current = new MenuGroup(row.getProduct_pmf_desc(), prodId, menuId);
                     groups.add(current);
                 }
             } else if (current != null && !link.equals("NA") && !link.isEmpty()) {
                 current.getFunctions().add(new MenuFunction(
-                    row.getProduct_pmf_desc(), row.getProduct_id(), menuId, funcId));
+                    row.getProduct_pmf_desc(), prodId, menuId, funcId));
             }
         }
         return groups;

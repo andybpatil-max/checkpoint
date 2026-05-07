@@ -5,7 +5,7 @@
     <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/></head>
 <body>
     <div th:replace="~{fragments/layout :: header}"></div>
-<div id="content">
+<div id="content" style="text-align:center;">
   <h2>Deposits History Detail</h2>
   <div th:if="${error}" style="color:red" th:text="${error}"></div>
   <p><a th:href="@{/DepsHist.action}">Back to History</a></p>

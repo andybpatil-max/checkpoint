@@ -5,7 +5,7 @@
     <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/></head>
 <body>
     <div th:replace="~{fragments/layout :: header}"></div>
-<div id="content">
+<div id="content" style="text-align:center;">
   <h2>Release Earmark Files</h2>
   <div th:if="${error}" style="color:red" th:text="${error}"></div>
   <p>Process Date: <span th:text="${sel.processDate}"></span></p>

@@ -1,10 +1,17 @@
+logging:
+  file:
+    name: /opt/checkpoint/logs/checkpoint.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 30
+
 spring:
   application:
     name: checkpoint
   datasource:
-    url: jdbc:oracle:thin:@${DB_HOST:localhost}:${DB_PORT:1521}:${DB_SID:ORCL}
-    username: ${DB_USER:checkpoint}
-    password: ${DB_PASS:}
+    url: jdbc:oracle:thin:@${DB_HOST:10.0.0.155}:${DB_PORT:1521}:${DB_SID:ORCLCDB}
+    username: ${DB_USER:C##INCL}
     driver-class-name: oracle.jdbc.OracleDriver
     hikari:
       initialization-fail-timeout: -1

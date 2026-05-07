@@ -5,7 +5,7 @@
     <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/></head>
 <body>
     <div th:replace="~{fragments/layout :: header}"></div>
-<div id="content">
+<div id="content" style="text-align:center;">
   <h2 th:text="${actionMode == 'New' ? 'New Stop Pay' : 'Modify Stop Pay'}">Stop Pay</h2>
   <div th:if="${error}" style="color:red" th:text="${error}"></div>
   <form method="post" th:action="${actionMode == 'New' ? '/Stoppay.action?action=Add' : '/Stoppay.action?action=Update'}" th:object="${stopDetail}">

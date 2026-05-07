@@ -1,377 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-         version="2.4">
--->
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
 
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-	 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd
-         http://java.sun.com/xml/ns/javaee/web-services-client_1_3.xsd"
-         version="2.5">
-         <!-- ... your web app configuration ... -->
+    <description>Checkpoint Spring Boot Application</description>
+    <display-name>Checkpoint</display-name>
 
-    <description>PureECM checkPoint</description>
-    <display-name>PureECM checkPoint</display-name>
+    <!-- ========================================================= -->
+    <!-- Servlet Context Listener                                   -->
+    <!-- ========================================================= -->
+    <listener>
+        <listener-class>com.webfiche.checkpoint.actions.EcontServletContextListener</listener-class>
+    </listener>
 
-<!-- ***************************************************** -->
-<!-- Session Context Listener Initialization Configuration -->
-<!-- ***************************************************** -->
-
-  <listener>
-    <listener-class>econtroller.actions.EcontServletContextListener</listener-class>
-  </listener>
-
-<!-- ******************************************************** -->
-<!-- Session Management Listener Initialization Configuration -->
-<!-- ******************************************************** -->
-
-  <listener>
-    <listener-class>econtroller.actions.EcontSessionManager</listener-class>
-  </listener>
-
-<!-- *********************************************	-->
-<!-- Database Initialization Servlet Configuration	-->
-<!-- *********************************************	-->
-<!-- to switch the data base do the following steps:	-->
-<!--	Change	1 driverclassname		  	-->
-<!--		2 dburl				  	-->
-<!--		3 user				  	-->
-<!--		4 password			  	-->
-<!--		5 dbused			  	-->
-
-  <servlet>
-    <servlet-name>database</servlet-name>
-    <servlet-class>econtroller.DatabaseServlet</servlet-class>
-    <init-param>
-      <param-name>driverclassname</param-name>
-	<param-value>oracle.jdbc.driver.OracleDriver</param-value>
-<!--
-	<param-value>oracle.jdbc.driver.OracleDriver</param-value>
-	<param-value>org.gjt.mm.mysql.Driver</param-value>
--->
-    </init-param>
-    <init-param>
-      <param-name>dburl</param-name>
-	  <param-value>jdbc:oracle:thin:@10.0.0.155:1521:ORCLCDB</param-value>
-<!--
-	  <param-value>jdbc:oracle:thin:@localhost:1521:INCL</param-value>
-	  <param-value>jdbc:oracle:thin:@localhost:1524:INCL</param-value>
-	  <param-value>jdbc:oracle:thin:@esl:1521:INCL</param-value>
-	  <param-value>jdbc:oracle:thin:@esl:1521:COLLECT</param-value>
-	  <param-value>jdbc:oracle:thin:@esl:1521:DEPOSITS</param-value>
-	  <param-value>jdbc:oracle:thin:@esl:1521:MONTINCL</param-value>
-	  <param-value>jdbc:oracle:thin:@nykcmss3017:1523:CTLUSUAT</param-value>
-	  <param-value>jdbc:oracle:thin:@nydcmss3017:1523:CTLUSUAT</param-value>
-	  <param-value>jdbc:mysql://10.0.0.12/incl</param-value>
--->
-    </init-param>
-    <init-param>
-      <param-name>releaseVersion</param-name>
-      <param-value>Production v5.1.001</param-value>
-    </init-param>
-    <init-param>
-      <param-name>appSchema</param-name>
-      <param-value>INCL</param-value>
-    </init-param>
-    <init-param>
-      <param-name>user</param-name>
-      <param-value>C##INCL</param-value>
-<!--
-	  <param-value>econtradm</param-value>
-	  <param-value>scott</param-value>
-	  <param-value>collect</param-value>
-	  <param-value>deposits</param-value>
-	  <param-value>andy</param-value>
-	  <param-value>incl</param-value>
--->
-    </init-param>
-
-<!--
-    <init-param>
-      <param-name>password</param-name>
-      <param-value>andy</param-value>
-      <param-value>econtr</param-value>
-      <param-value>tiger</param-value>
-      <param-value>collector</param-value>
-      <param-value>outclear</param-value>
-      <param-value>andy</param-value>
-    </init-param>
--->
-    <init-param>
-      <param-name>uPort</param-name>
-      <param-value>12100</param-value>
-<!--
-      <param-value>12002</param-value>
--->
-    </init-param>
-    <init-param>
-      <param-name>nodename</param-name>
-<!--
-      <param-value>nykcmss3017</param-value>
-      <param-value>nykcmss3017.us.net.intra</param-value>
-      <param-value>nydcmss3017.us.net.intra</param-value>
--->
-      <param-value>esl</param-value>
-    </init-param>
-    <init-param>
-      <param-name>dbused</param-name>
-      <param-value>ORACLE</param-value>
-<!--
-      <param-value>ORACLE</param-value>
-      <param-value>MySQL</param-value>
- -->
-    </init-param>
-    <init-param>
-      <param-name>reportHdg</param-name>
-      <param-value>COMMERZBANK AG NEW YORK</param-value>
-<!--
-      <param-value>BNP PARIBAS MONTREAL</param-value>
-      <param-value>BNP PARIBAS NEW YORK</param-value>
--->
-    </init-param>
-    <init-param>
-	<param-name>minSizePw</param-name>
-	<param-value>8</param-value>
-    </init-param>
-    <init-param>
-	<param-name>numPastPw</param-name>
-	<param-value>10</param-value>
-    </init-param>
-    <init-param>
-	<param-name>numTrysPw</param-name>
-	<param-value>5</param-value>
-    </init-param>
-    <init-param>
-	<param-name>bankId</param-name>
-	<param-value>CBKNY</param-value>
-<!--	
-   	<param-value>BNPMO</param-value>
-	<param-value>BNPNY</param-value>
-	<param-value>FNGNY</param-value>
--->
-    </init-param>
-    <init-param>
-	<param-name>fastAxsNum</param-name>
-	<param-value>20</param-value>
-    </init-param>
-    <init-param>
-	<param-name>smtpDomain</param-name>
-<!--	<param-value>smtp.comcast.net</param-value>	-->
-	<param-value>mail.exacthosting.com</param-value>
-    </init-param>
-    <init-param>
-	<param-name>imagesPerPDF</param-name>
-	<param-value>100</param-value>
-    </init-param>
-    <init-param>
-	<param-name>checksPerView</param-name>
-	<param-value>500</param-value>
-    </init-param>
-    <init-param>
-	<param-name>imageURL</param-name>
-	<param-value>/imagedir/</param-value>
-    </init-param>
-    <init-param>
-	<param-name>fromEmailAddress</param-name>
-	<param-value>Andy.Patil@webFiche.com</param-value>
-<!--
-	<param-value>PAndR@BNPAmericas.com</param-value>
--->
-    </init-param>
-    <init-param>
-	<param-name>stmtSubject</param-name>
-	<param-value>Account Statement </param-value>
-    </init-param>
-    <init-param>
-	<param-name>stmtMsgDir</param-name>
-	<param-value>/usr/local/econtr/ny/</param-value>
-<!--
-	<param-value>/home/montreal/</param-value>
-	<param-value>/home/montreal/</param-value>
--->
-    </init-param>
-    <init-param>
-	<param-name>fourIsVerify</param-name>
-	<param-value>Y</param-value>
-    </init-param>
-    <init-param>
-	<param-name>sysAlertEmail</param-name>
-	<param-value>andybpatil@gmail.com</param-value>
-    </init-param>
-    <init-param>
-	<param-name>sysDeposits</param-name>
-	<param-value>Y</param-value>
-    </init-param>
-    <init-param>
-	<param-name>checkPointIn</param-name>
-	<param-value>Y</param-value>
-    </init-param>
-    <init-param>
-	<param-name>checkPointOut</param-name>
-	<param-value>Y</param-value>
-    </init-param>
-    <init-param>
-	<param-name>checkPointRemote</param-name>
-	<param-value>N</param-value>
-    </init-param>
-    <init-param>
-	<param-name>flowPoint</param-name>
-	<param-value>Y</param-value>
-    </init-param>
-    <init-param>
-	<param-name>netPoint</param-name>
-	<param-value>Y</param-value>
-    </init-param>
-    <init-param>
-	<param-name>infoPoint</param-name>
-	<param-value>Y</param-value>
-    </init-param>
-    <init-param>
-	<param-name>mdPoint</param-name>
-	<param-value>Y</param-value>
-    </init-param>
-    <init-param>
-	<param-name>mandatePoint</param-name>
-	<param-value>N</param-value>
-    </init-param>
-<!--
-    extDelimeter is the delimiter for fields in an extract file TAB is a preferred delimiter unless 
-    another specific delimiter is requested by client
--->
-    <init-param>
-	<param-name>extDelimiter</param-name>
-	<param-value>\t</param-value>
-<!--
-	<param-value>|</param-value>
--->
-    </init-param>
-    <init-param>
-	<param-name>daysCheckValid</param-name>
-	<param-value>180</param-value>
-    </init-param>
-    <init-param>
-	<param-name>batchPgm</param-name>
-	<param-value>CheckTiff2Xml.exe</param-value>
-    </init-param>
-    <init-param>
-	<param-name>batchForm</param-name>
-	<param-value>D:\NewChecks\Form\NewCheck1.xpbd</param-value>
-    </init-param>
-    <init-param>
-	<param-name>batchTiffs</param-name>
-	<param-value>D:\NewChecks\img1</param-value>
-    </init-param>
-<!--
-    <init-param>
-	<param-name>mandatePgm</param-name>
-	<param-value>MandateTiff2Xml.exe</param-value>
-    </init-param>
-    <init-param>
-	<param-name>mandateForm</param-name>
-	<param-value>D:\MandateTest\Form\NewMandate1.xpbd</param-value>
-    </init-param>
-    <init-param>
-	<param-name>mandateTiffs</param-name>
-	<param-value>D:\MandateTest\NewImage1</param-value>
-    </init-param>
--->
-    <init-param>
-	<param-name>contentRoot</param-name>
-	<param-value>/opt/infopoint/</param-value>
-    </init-param>
-    <init-param>
-	<param-name>textFiles</param-name>
-	<param-value>@ascii@dat@data@err@form@java@log@map@out@prt@rpt@rep@spl@spool@txt@text@vb@</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!--              Configuration of the Stripes Filter.                   -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <filter>
-        <description>
-            Provides essential configuration and request processing services
-            for the Stripes framework.
-        </description>
-        <display-name>Stripes Filter</display-name>
-        <filter-name>StripesFilter</filter-name>
-        <filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
-
-        <!-- REQUIRED init parameter for the Stripes Filter. -->
-        <init-param>
-            <param-name>ActionResolver.Packages</param-name>
-            <param-value>econtroller.,econtroller.actions.,econtroller.sysadmin.actions.
-			econtroller.inclear.actions.,econtroller.deposits.actions.,
-	                econtroller.mandate.actions.</param-value>
-        </init-param>
-
-        <!-- Optional init parameter for Extension  -->
-        <init-param>
-            <param-name>Extension.Packages</param-name>
-            <param-value>econtroller.ext.MyPropertyBinder</param-value>
-        </init-param>
-
-	<init-param>
-	    <param-name>PopulationStrategy.Class</param-name>
-	    <param-value>net.sourceforge.stripes.tag.BeanFirstPopulationStrategy</param-value>
-	</init-param>
-
-        <!-- Optional init parameter for the Stripes Filter. -->
-        <init-param>
-            <param-name>ActionBeanContext.Class</param-name>
-            <param-value>econtroller.actions.EcontrollerActionBeanContext</param-value>
-        </init-param>
-<!--
-   	<init-param>
-	    <param-name>Extension.Packages</param-name>
-	    <param-value>org.stripesstuff.stripersist</param-value>
-	</init-param>
--->
-        <init-param>
-            <param-name>Stripes.EncryptionKey</param-name>
-            <param-value>Don't Copy/Paste Me! Make up your own encryption key and keep it secret!</param-value>
-        </init-param>
-    </filter>
-
-    <filter-mapping>
-	<filter-name>StripesFilter</filter-name>
-	<url-pattern>*.jsp</url-pattern>
-	<dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-
-    <filter-mapping>
-	<filter-name>StripesFilter</filter-name>
-	<servlet-name>StripesDispatcher</servlet-name>
-	<dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!--         Configuration of the Stripes dispatcher Servlet.            -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- ========================================================= -->
+    <!-- Database Initialization Servlet (load-on-startup=1)       -->
+    <!-- Reads DB config, checks tables, loads system_control,     -->
+    <!-- starts background file-server threads (Phase F)           -->
+    <!-- ========================================================= -->
     <servlet>
-        <servlet-name>StripesDispatcher</servlet-name>
-        <servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>
+        <servlet-name>database</servlet-name>
+        <servlet-class>com.webfiche.checkpoint.DatabaseServlet</servlet-class>
+
+        <init-param><param-name>driverclassname</param-name>
+            <param-value>oracle.jdbc.driver.OracleDriver</param-value></init-param>
+        <init-param><param-name>dburl</param-name>
+            <param-value>jdbc:oracle:thin:@10.0.0.155:1521:ORCLCDB</param-value></init-param>
+        <init-param><param-name>releaseVersion</param-name>
+            <param-value>Production v5.1.001</param-value></init-param>
+        <init-param><param-name>appSchema</param-name>
+            <param-value>INCL</param-value></init-param>
+        <init-param><param-name>user</param-name>
+            <param-value>C##INCL</param-value></init-param>
+        <init-param><param-name>uPort</param-name>
+            <param-value>12100</param-value></init-param>
+        <init-param><param-name>nodename</param-name>
+            <param-value>esl</param-value></init-param>
+        <init-param><param-name>dbused</param-name>
+            <param-value>ORACLE</param-value></init-param>
+        <init-param><param-name>reportHdg</param-name>
+            <param-value>COMMERZBANK AG NEW YORK</param-value></init-param>
+        <init-param><param-name>minSizePw</param-name>
+            <param-value>8</param-value></init-param>
+        <init-param><param-name>numPastPw</param-name>
+            <param-value>10</param-value></init-param>
+        <init-param><param-name>numTrysPw</param-name>
+            <param-value>5</param-value></init-param>
+        <init-param><param-name>bankId</param-name>
+            <param-value>CBKNY</param-value></init-param>
+        <init-param><param-name>fastAxsNum</param-name>
+            <param-value>20</param-value></init-param>
+        <init-param><param-name>smtpDomain</param-name>
+            <param-value>mail.exacthosting.com</param-value></init-param>
+        <init-param><param-name>imagesPerPDF</param-name>
+            <param-value>100</param-value></init-param>
+        <init-param><param-name>checksPerView</param-name>
+            <param-value>500</param-value></init-param>
+        <init-param><param-name>imageURL</param-name>
+            <param-value>/imagedir/</param-value></init-param>
+        <init-param><param-name>fromEmailAddress</param-name>
+            <param-value>Andy.Patil@webFiche.com</param-value></init-param>
+        <init-param><param-name>stmtSubject</param-name>
+            <param-value>Account Statement</param-value></init-param>
+        <init-param><param-name>stmtMsgDir</param-name>
+            <param-value>/usr/local/econtr/ny/</param-value></init-param>
+        <init-param><param-name>fourIsVerify</param-name>
+            <param-value>Y</param-value></init-param>
+        <init-param><param-name>sysAlertEmail</param-name>
+            <param-value>andybpatil@gmail.com</param-value></init-param>
+        <init-param><param-name>checkPointIn</param-name>
+            <param-value>Y</param-value></init-param>
+        <init-param><param-name>checkPointOutLockBox</param-name>
+            <param-value>Y</param-value></init-param>
+        <init-param><param-name>checkPointRemote</param-name>
+            <param-value>N</param-value></init-param>
+        <init-param><param-name>flowPoint</param-name>
+            <param-value>Y</param-value></init-param>
+        <init-param><param-name>netPoint</param-name>
+            <param-value>Y</param-value></init-param>
+        <init-param><param-name>infoPoint</param-name>
+            <param-value>Y</param-value></init-param>
+        <init-param><param-name>mdPoint</param-name>
+            <param-value>Y</param-value></init-param>
+        <init-param><param-name>mandatePoint</param-name>
+            <param-value>N</param-value></init-param>
+        <init-param><param-name>extDelimiter</param-name>
+            <param-value>&#9;</param-value></init-param>
+        <init-param><param-name>daysCheckValid</param-name>
+            <param-value>180</param-value></init-param>
+        <init-param><param-name>batchPgm</param-name>
+            <param-value>CheckTiff2Xml.exe</param-value></init-param>
+        <init-param><param-name>batchForm</param-name>
+            <param-value>/opt/checkpoint/batch/NewCheck1.xpbd</param-value></init-param>
+        <init-param><param-name>batchTiffs</param-name>
+            <param-value>/opt/checkpoint/batch/img</param-value></init-param>
+        <init-param><param-name>contentRoot</param-name>
+            <param-value>/opt/infopoint/</param-value></init-param>
+        <init-param><param-name>textFiles</param-name>
+            <param-value>@ascii@dat@data@err@form@java@log@map@out@prt@rpt@rep@spl@spool@txt@text@vb@</param-value></init-param>
+        <init-param><param-name>debugFlag</param-name>
+            <param-value>N</param-value></init-param>
+
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet-mapping>
-        <servlet-name>StripesDispatcher</servlet-name>
-        <url-pattern>/dispatcher</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>StripesDispatcher</servlet-name>
-        <url-pattern>/action/*</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>StripesDispatcher</servlet-name>
-        <url-pattern>*.action</url-pattern>
-    </servlet-mapping>
 </web-app>

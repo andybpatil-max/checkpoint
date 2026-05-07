@@ -8,7 +8,7 @@
 </head>
 <body>
     <div th:replace="~{fragments/layout :: header}"></div>
-<div id="content">
+<div id="content" style="text-align:center;">
     <h2 th:text="${actionMode == 'Add' ? 'Add DB Table' : 'Update DB Table'}">DB Table</h2>
     <div th:if="${error}" style="color:red" th:text="${error}"></div>
 

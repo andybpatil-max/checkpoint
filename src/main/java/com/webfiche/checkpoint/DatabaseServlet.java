@@ -460,5 +460,33 @@ public final class DatabaseServlet extends HttpServlet {
 			PrintLog("Errors starting eController Application CALL SUPPORT...");
 			PrintLog("*******************************************************");
 		}
+		// Push key values into Spring AppProperties so MVC layer stays in sync
+		try {
+			org.springframework.web.context.WebApplicationContext springCtx =
+				org.springframework.web.context.support.WebApplicationContextUtils
+					.getWebApplicationContext(config.getServletContext());
+			if (springCtx != null) {
+				com.webfiche.checkpoint.config.AppProperties appProps =
+					springCtx.getBean(com.webfiche.checkpoint.config.AppProperties.class);
+				appProps.setApplDate(applDate);
+				appProps.setNodeName(nodename);
+				appProps.setDbUsed(dbused);
+				appProps.setBankId(bankId);
+				appProps.setOurAba(OUR_ABA);
+				appProps.setDefCurr(DEF_CURRENCY);
+				appProps.setImagesPerPdf(Integer.parseInt(imagesPerPDF));
+				appProps.setChecksPerView(Integer.parseInt(checksPerView));
+				appProps.setImageUrl(imageURL);
+				appProps.setFromEmailAddress(fromEmailAddress);
+				appProps.setSysAlertEmail(sysAlertEmail);
+				appProps.setSmtpHost(smtpDomain);
+				appProps.setDebugFlag(debugFlag);
+				appProps.setEodFlag(EOD_FLAG);
+				appProps.setBodFlag(BOD_FLAG);
+				PrintLog("Spring AppProperties updated from DatabaseServlet");
+			}
+		} catch (Exception e) {
+			PrintLog("Could not update Spring AppProperties: " + e.getMessage());
+		}
 	} // end of init method
 }
