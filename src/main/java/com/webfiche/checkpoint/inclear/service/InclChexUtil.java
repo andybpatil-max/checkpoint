@@ -785,6 +785,7 @@ public class InclChexUtil {
 			param		= chexSelector.GetParams();
 		StringBuffer sql		= new StringBuffer();
 		row_count				= 0;
+		chexBeans.clear();
 		sql.setLength(0);
 		sql.append("SELECT CHEX_PROC_DATE, CHEX_ORIG_ACCOUNT_NUM, ");
 		sql.append("CHEX_ORIG_CHECK_NUM, CHEX_ACCOUNT_NUM, ");

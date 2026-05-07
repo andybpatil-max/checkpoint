@@ -143,7 +143,7 @@ public class ChexController extends InclearBaseController {
         try (Connection conn = openConnection()) {
             ChexSelector sel = buildSelector();
             chUtil.GetChexRows(conn, sel, acctNum, checkNum, uniqueIsn);
-            ChexDetail cd = sel.getCheckrows().length > 0 ? sel.getCheckrows()[0] : new ChexDetail();
+            ChexDetail cd = sel.getModifyRow();
             model.addAttribute("chexDetail", cd);
             model.addAttribute("user", userSession.getUser());
         } catch (Exception e) {
@@ -161,7 +161,7 @@ public class ChexController extends InclearBaseController {
         try (Connection conn = openConnection()) {
             ChexSelector sel = buildSelector();
             chUtil.GetChexRows(conn, sel, acctNum, checkNum, uniqueIsn);
-            ChexDetail cd = sel.getCheckrows().length > 0 ? sel.getCheckrows()[0] : new ChexDetail();
+            ChexDetail cd = sel.getModifyRow();
             loadLists(conn, sel);
             model.addAttribute("chexDetail", cd);
             model.addAttribute("sel", sel);

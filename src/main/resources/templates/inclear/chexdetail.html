@@ -2,37 +2,71 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head><meta charset="UTF-8"/><title>Checkpoint - Check Detail</title>
 <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
-    <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/></head>
+<link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/>
+<style>
+  html, body { height: 100%; margin: 0; }
+  body { display: flex; flex-direction: column; }
+  #content { flex: 1; overflow-y: auto; text-align: center; }
+  .container { position: static !important; }
+  .img-row { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+  .img-row img { width: 49%; cursor: zoom-in; border: 1px solid #ccc; }
+  #zoom-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.82); z-index: 9999;
+    align-items: center; justify-content: center; cursor: zoom-out;
+  }
+  #zoom-overlay.active { display: flex; }
+  #zoom-overlay img { max-width: 95vw; max-height: 92vh; border: 2px solid #fff; }
+</style>
+</head>
 <body>
-    <div th:replace="~{fragments/layout :: header}"></div>
-<div id="content" style="text-align:center;">
+<div th:replace="~{fragments/layout :: header}"></div>
+<div id="content">
   <h2>Check Detail</h2>
   <div th:if="${error}" style="color:red" th:text="${error}"></div>
-  <table border="0" cellpadding="4" style="margin:auto; text-align:left;">
-    <tr><td><b>Account:</b></td><td th:text="${chexDetail.chex_account_num}"></td></tr>
-    <tr><td><b>Check #:</b></td><td th:text="${chexDetail.chex_check_num}"></td></tr>
-    <tr><td><b>Amount:</b></td><td th:text="${chexDetail.chex_check_amount_disp}"></td></tr>
-    <tr><td><b>Status:</b></td><td th:text="${chexDetail.chex_check_status}"></td></tr>
-    <tr><td><b>Process Date:</b></td><td th:text="${chexDetail.chex_proc_date_disp}"></td></tr>
-    <tr><td><b>Issue Date:</b></td><td th:text="${chexDetail.chex_issue_date_disp}"></td></tr>
-    <tr><td><b>Routing Transit:</b></td><td th:text="${chexDetail.chex_routing_transit}"></td></tr>
-    <tr><td><b>Payee:</b></td><td th:text="${chexDetail.chex_payee}"></td></tr>
-    <tr><td><b>Comments:</b></td><td th:text="${chexDetail.chex_comments}"></td></tr>
-    <tr><td><b>Last Modified:</b></td><td th:text="${chexDetail.chex_last_modified}"></td></tr>
-    <tr><td><b>Modified By:</b></td><td th:text="${chexDetail.chex_mod_user}"></td></tr>
-  </table>
-  <div th:if="${chexDetail.chex_image_f != null and !chexDetail.chex_image_f.isEmpty()}" style="margin-top:16px;">
-    <p><b>Front</b></p>
-    <img th:src="${chexDetail.chex_image_f}" alt="Front" style="max-width:800px; border:1px solid #ccc;"/>
+  <div id="detail">
+    <table colspan="2" width="70%" align="center" border="1">
+      <tr><th class="header" colspan="2">Check Details</th></tr>
+      <tr><th align="right">Process Date</th><td align="left" th:text="${chexDetail.chex_proc_date_disp}"></td></tr>
+      <tr><th align="right">Account</th><td align="left" th:text="${chexDetail.chex_account_num}"></td></tr>
+      <tr><th align="right">Check Number</th><td align="left" th:text="${chexDetail.chex_check_num}"></td></tr>
+      <tr><th align="right">Currency</th><td align="left" th:text="${chexDetail.chex_check_currency}"></td></tr>
+      <tr><th align="right">Amount</th><td align="left" th:text="${chexDetail.chex_check_amount_disp}"></td></tr>
+      <tr><th align="right">Issue Date</th><td align="left" th:text="${chexDetail.chex_issue_date_disp}"></td></tr>
+      <tr><th align="right">Payee</th><td align="left" th:text="${chexDetail.chex_payee}"></td></tr>
+      <tr><th align="right">Payee Address 1</th><td align="left" th:text="${chexDetail.chex_payee_addr1}"></td></tr>
+      <tr><th align="right">Payee Address 2</th><td align="left" th:text="${chexDetail.chex_payee_addr2}"></td></tr>
+      <tr><th align="right">Payee Address 3</th><td align="left" th:text="${chexDetail.chex_payee_addr3}"></td></tr>
+      <tr th:if="${!chexDetail.chex_return_status.isBlank()}">
+        <th align="right" style="background:lightyellow;">Return Reason</th>
+        <td align="left" style="background:lightyellow;" th:text="${chexDetail.chex_reason_desc}"></td>
+      </tr>
+      <tr><th align="right" style="background:lightyellow;">BOFD</th><td align="left" style="background:lightyellow;" th:text="${chexDetail.chex_BOFD_aba}"></td></tr>
+      <tr><th align="right" style="background:lightyellow;">BOFD Date</th><td align="left" style="background:lightyellow;" th:text="${chexDetail.chex_BOFD_date}"></td></tr>
+      <tr><th align="right">Comments</th><td align="left" th:text="${chexDetail.chex_comments}"></td></tr>
+      <tr><th align="right">Reject Reason</th><td align="left"><span th:text="${chexDetail.chex_reason_codes}"></span> <span th:text="${chexDetail.chex_reason_desc}"></span></td></tr>
+      <tr><th align="right">Status</th><td align="left"><span th:text="${chexDetail.chex_check_status}"></span> <span th:text="${chexDetail.chex_status_desc}"></span></td></tr>
+    </table>
   </div>
-  <div th:if="${chexDetail.chex_image_b != null and !chexDetail.chex_image_b.isEmpty()}" style="margin-top:16px;">
-    <p><b>Back</b></p>
-    <img th:src="${chexDetail.chex_image_b}" alt="Back" style="max-width:800px; border:1px solid #ccc;"/>
+  <div class="img-row">
+    <img th:if="${chexDetail.chex_image_f != null and !chexDetail.chex_image_f.isEmpty()}"
+         th:src="${chexDetail.chex_image_f}" alt="Front" onclick="zoom(this.src)"/>
+    <img th:if="${chexDetail.chex_image_b != null and !chexDetail.chex_image_b.isEmpty()}"
+         th:src="${chexDetail.chex_image_b}" alt="Back" onclick="zoom(this.src)"/>
   </div>
   <p style="margin-top:16px;">
     <a th:href="@{/Chex.action(action='View', chexStatus=${chexDetail.chex_check_status})}">Back to Inquiry</a> &nbsp;
     <a th:href="@{/Chex.action}">Summary</a>
   </p>
 </div>
-    <div th:replace="~{fragments/layout :: footer}"></div>
+<div id="zoom-overlay" onclick="this.classList.remove('active')">
+  <img id="zoom-img" src="" alt=""/>
+</div>
+<script>
+  function zoom(src) {
+    document.getElementById('zoom-img').src = src;
+    document.getElementById('zoom-overlay').classList.add('active');
+  }
+</script>
+<div th:replace="~{fragments/layout :: footer}"></div>
 </body></html>
