@@ -115,6 +115,13 @@ public class ChexHistController extends InclearBaseController {
                          @RequestParam(defaultValue = "") String toPeriod,
                          @RequestParam(defaultValue = "") String fromDate,
                          @RequestParam(defaultValue = "") String toDate,
+                         @RequestParam(defaultValue = "") String fromAccount,
+                         @RequestParam(defaultValue = "") String toAccount,
+                         @RequestParam(defaultValue = "") String fromCheck,
+                         @RequestParam(defaultValue = "") String toCheck,
+                         @RequestParam(defaultValue = "") String fromAmount,
+                         @RequestParam(defaultValue = "") String toAmount,
+                         @RequestParam(defaultValue = "") String currency,
                          Model model) {
         if (isNotLoggedIn()) return "redirect:/login";
         try (Connection conn = openConnection()) {
@@ -123,10 +130,15 @@ public class ChexHistController extends InclearBaseController {
             sel.setCh_to_period(toPeriod);
             sel.setCh_from_date(fromDate);
             sel.setCh_to_date(toDate);
-            ArrayList<String> histList = sel.getHistList();
-            chUtil.GetHistRows(conn, histList, sel);
+            sel.setCh_from_account(fromAccount);
+            sel.setCh_to_account(toAccount);
+            sel.setCh_from_check(fromCheck);
+            sel.setCh_to_check(toCheck);
+            sel.setCh_from_amount(fromAmount);
+            sel.setCh_to_amount(toAmount);
+            sel.setCh_currency(currency);
+            chUtil.GetHistRows(conn, sel.getHistList(), sel);
             model.addAttribute("sel", sel);
-            model.addAttribute("chexDetail", new ChexDetail());
             model.addAttribute("user", userSession.getUser());
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
