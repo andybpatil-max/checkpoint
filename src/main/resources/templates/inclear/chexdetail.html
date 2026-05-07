@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkpoint - Check Detail</title>
+<link rel="stylesheet" th:href="@{/css/global-1.css}"/>
+    <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/></head>
+<body>
+    <div th:replace="~{fragments/layout :: header}"></div>
+<div id="content" style="text-align:center;">
+  <h2>Check Detail</h2>
+  <div th:if="${error}" style="color:red" th:text="${error}"></div>
+  <table border="0" cellpadding="4" style="margin:auto; text-align:left;">
+    <tr><td><b>Account:</b></td><td th:text="${chexDetail.chex_account_num}"></td></tr>
+    <tr><td><b>Check #:</b></td><td th:text="${chexDetail.chex_check_num}"></td></tr>
+    <tr><td><b>Amount:</b></td><td th:text="${chexDetail.chex_check_amount_disp}"></td></tr>
+    <tr><td><b>Status:</b></td><td th:text="${chexDetail.chex_check_status}"></td></tr>
+    <tr><td><b>Process Date:</b></td><td th:text="${chexDetail.chex_proc_date_disp}"></td></tr>
+    <tr><td><b>Issue Date:</b></td><td th:text="${chexDetail.chex_issue_date_disp}"></td></tr>
+    <tr><td><b>Routing Transit:</b></td><td th:text="${chexDetail.chex_routing_transit}"></td></tr>
+    <tr><td><b>Payee:</b></td><td th:text="${chexDetail.chex_payee}"></td></tr>
+    <tr><td><b>Comments:</b></td><td th:text="${chexDetail.chex_comments}"></td></tr>
+    <tr><td><b>Last Modified:</b></td><td th:text="${chexDetail.chex_last_modified}"></td></tr>
+    <tr><td><b>Modified By:</b></td><td th:text="${chexDetail.chex_mod_user}"></td></tr>
+  </table>
+  <div th:if="${chexDetail.chex_image_f != null and !chexDetail.chex_image_f.isEmpty()}" style="margin-top:16px;">
+    <p><b>Front</b></p>
+    <img th:src="${chexDetail.chex_image_f}" alt="Front" style="max-width:800px; border:1px solid #ccc;"/>
+  </div>
+  <div th:if="${chexDetail.chex_image_b != null and !chexDetail.chex_image_b.isEmpty()}" style="margin-top:16px;">
+    <p><b>Back</b></p>
+    <img th:src="${chexDetail.chex_image_b}" alt="Back" style="max-width:800px; border:1px solid #ccc;"/>
+  </div>
+  <p style="margin-top:16px;">
+    <a th:href="@{/Chex.action(action='View', chexStatus=${chexDetail.chex_check_status})}">Back to Inquiry</a> &nbsp;
+    <a th:href="@{/Chex.action}">Summary</a>
+  </p>
+</div>
+    <div th:replace="~{fragments/layout :: footer}"></div>
+</body></html>

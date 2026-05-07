@@ -9,14 +9,13 @@
   <h2>Inclear Checks</h2>
   <div th:if="${error}" style="color:red" th:text="${error}"></div>
   <table border="1" cellpadding="4">
-    <tr class="tblh"><th>Status</th><th>Description</th><th>Count</th><th>Amount</th></tr>
+    <tr class="tblh"><th>Description</th><th>Count</th><th>Amount</th></tr>
     <tr th:each="row : ${sel.summaryrows}">
-      <td th:text="${row.chex_check_status}"></td>
-      <td th:text="${row.chex_status_description}"></td>
+      <td><a th:href="@{/Chex.action(action='View', chexStatus=${row.chex_check_status})}" th:text="${row.chex_status_description}"></a></td>
       <td th:text="${row.chex_check_count}"></td>
       <td th:text="${row.chex_summ_amount}"></td>
     </tr>
-    <tr th:if="${sel.summaryrows == null or sel.summaryrows.length == 0}"><td colspan="4">No data.</td></tr>
+    <tr th:if="${sel.summaryrows == null or sel.summaryrows.length == 0}"><td colspan="3">No data.</td></tr>
   </table>
   <p>
     <a th:href="@{/Chex.action(action='View')}">View Checks</a> &nbsp;

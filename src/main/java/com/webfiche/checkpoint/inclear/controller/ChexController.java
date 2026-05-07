@@ -134,6 +134,24 @@ public class ChexController extends InclearBaseController {
         return "inclear/chexfraud";
     }
 
+    @GetMapping(value = "/Chex.action", params = "action=Detail")
+    public String detail(@RequestParam(defaultValue = "") String acctNum,
+                         @RequestParam(defaultValue = "") String checkNum,
+                         @RequestParam(defaultValue = "") String uniqueIsn,
+                         Model model) {
+        if (isNotLoggedIn()) return "redirect:/login";
+        try (Connection conn = openConnection()) {
+            ChexSelector sel = buildSelector();
+            chUtil.GetChexRows(conn, sel, acctNum, checkNum, uniqueIsn);
+            ChexDetail cd = sel.getCheckrows().length > 0 ? sel.getCheckrows()[0] : new ChexDetail();
+            model.addAttribute("chexDetail", cd);
+            model.addAttribute("user", userSession.getUser());
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        return "inclear/chexdetail";
+    }
+
     @GetMapping(value = "/Chex.action", params = "action=Modify")
     public String modifyForm(@RequestParam(defaultValue = "") String acctNum,
                              @RequestParam(defaultValue = "") String checkNum,

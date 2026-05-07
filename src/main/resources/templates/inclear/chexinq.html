@@ -2,10 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head><meta charset="UTF-8"/><title>Checkpoint - Check Inquiry</title>
 <link rel="stylesheet" th:href="@{/css/global-1.css}"/>
-    <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/></head>
+    <link rel="stylesheet" th:href="@{/css/screen.css}" href="/css/screen.css"/>
+<style>
+  html, body { height: 100%; margin: 0; }
+  body { display: flex; flex-direction: column; }
+  #content { flex: 1; overflow-y: auto; text-align: center; }
+  .container { position: static !important; }
+</style></head>
 <body>
     <div th:replace="~{fragments/layout :: header}"></div>
-<div id="content" style="text-align:center;">
+<div id="content">
   <h2>Check Inquiry</h2>
   <div th:if="${error}" style="color:red" th:text="${error}"></div>
   <form method="get" th:action="@{/Chex.action}">
@@ -27,7 +33,7 @@
       <td th:text="${row.chex_check_amount_disp}"></td>
       <td th:text="${row.chex_check_status}"></td>
       <td th:text="${row.chex_proc_date_disp}"></td>
-      <td><a th:href="@{/Chex.action(action='Modify', acctNum=${row.chex_account_num}, checkNum=${row.chex_check_num}, uniqueIsn=${row.chex_unique_isn})}">Modify</a></td>
+      <td><a th:href="@{/Chex.action(action='Detail', acctNum=${row.chex_account_num}, checkNum=${row.chex_check_num}, uniqueIsn=${row.chex_unique_isn})}">Detail</a></td>
     </tr>
     <tr th:if="${sel.checkrows == null or sel.checkrows.length == 0}"><td colspan="6">No records found.</td></tr>
   </table>

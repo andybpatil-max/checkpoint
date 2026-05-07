@@ -725,7 +725,7 @@ public class InclChexUtil {
 		moduleName			= "GetChexRows2: ";
 		String proc_date	= "";
 		String unique_isn	= "";
-		param				+= " WHERE CHEX_ACCOUNT_NUM='" + acct_num + "'";
+		param				= " WHERE CHEX_ACCOUNT_NUM='" + acct_num + "'";
 		param				+= " AND CHEX_CHECK_NUM='" + check_num + "'";
 		param				+= " AND CHEX_UNIQUE_ISN='" + check_unique_isn + "'";
 		String accessFlag	= chexSelector.getAccessFlag();
@@ -905,10 +905,12 @@ public class InclChexUtil {
 			}
 			statement.close();
 			result.close();
+			param = "";
 			return (row_count);
 		} catch (SQLException e) {
 			PrintLog("Error Getting Chex" + e.toString());
 			PrintLog("Get Chex " + sql);
+			param = "";
 			return (0);
 		}
 	}
